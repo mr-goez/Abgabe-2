@@ -1,0 +1,8 @@
+@import '../sass/padding';
+
+$paddingBottom: $padding + 60px;
+
+main {
+    // Padding: top = 110; left und right = 15; bottom = 75
+    padding: $paddingHeader $padding $paddingBottom;
+}

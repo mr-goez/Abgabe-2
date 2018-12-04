@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core'
 import { Title } from '@angular/platform-browser'
+import { fadeIn } from '../shared/animations'
 
 @Component({
     selector: 'hs-home',
     template: `
-         <!-- to fade in = einblenden --
-        <h1 class="display-1">Hallo!</h1>
+        <h2 [@fadeIn]>Willkommen zu Ihrer persönlichen Kundenliste</h2>
     `,
+    animations: [fadeIn],
 })
 export class HomeComponent implements OnInit {
     constructor(private readonly title: Title) {}
 
     ngOnInit() {
-        this.title.setTitle('Beispiel')
+        this.title.setTitle('Home')
     }
 
     toString() {
