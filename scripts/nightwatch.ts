@@ -24,7 +24,7 @@ const nightwatch = path.join(
     'node_modules',
     'nightwatch',
     'bin',
-    'nightwatch'
+    'nightwatch',
 )
 
 const verbose = ''

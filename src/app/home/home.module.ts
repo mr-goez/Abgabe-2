@@ -10,6 +10,6 @@ const komponentenIntern: Array<Type<any>> = []
     // Der Singleton-Service "Title" wird benoetigt
     declarations: [...komponentenExport, ...komponentenIntern],
     providers: [Title],
-    exports: komponentenExport
+    exports: komponentenExport,
 })
 export class HomeModule {}

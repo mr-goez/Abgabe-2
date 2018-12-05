@@ -10,7 +10,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
                 Die Daten werden geladen. Bitte warten ...
             </span>
         </div>
-    `
+    `,
 })
 export class WaitingComponent {
     readonly faSpinner = faSpinner

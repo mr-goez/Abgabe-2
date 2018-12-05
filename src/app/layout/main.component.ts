@@ -7,11 +7,7 @@ import { Component } from '@angular/core'
     selector: 'hs-main',
     template: `
         <main>
-            <div class="col col-12">
-                   <!-- Komponente fuer das Routing, d.h. Platzhalter fuer den
-                        Austausch der HTML-Templates (= Fragmente) -->
-                <router-outlet></router-outlet>
-            </div>
+            <div class="col col-12"><router-outlet></router-outlet></div>
         </main>
     `,
     styleUrls: ['./main.component.scss'],

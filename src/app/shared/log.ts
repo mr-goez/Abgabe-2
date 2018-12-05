@@ -1,7 +1,7 @@
 export function log(
     target: any,
     key: string | symbol,
-    descriptor: TypedPropertyDescriptor<any>
+    descriptor: TypedPropertyDescriptor<any>,
 ): TypedPropertyDescriptor<any> {
     'use strict'
     const originalMethod = descriptor.value

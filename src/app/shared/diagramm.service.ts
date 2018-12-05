@@ -38,7 +38,7 @@ export class DiagrammService {
 
         console.log(
             'DiagrammService.constructor(): backgroundColors=',
-            this.backgroundColors
+            this.backgroundColors,
         )
     }
 
@@ -49,12 +49,12 @@ export class DiagrammService {
     @log
     createChart(
         chartElement: HTMLCanvasElement | undefined,
-        config: any
+        config: any,
     ): any | undefined {
         if (chartElement === undefined) {
             console.error(
                 'Kein HTML-Element fuer ein Chart gefunden:',
-                chartElement
+                chartElement,
             )
             return undefined
         }
@@ -76,7 +76,7 @@ export class DiagrammService {
      */
     getBackgroundColor(idx: number) {
         const colorHighlight = this.backgroundColors.get(
-            idx % 3
+            idx % 3,
         ) as ColorHighlight
         return colorHighlight.color
     }

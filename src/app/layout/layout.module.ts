@@ -5,18 +5,18 @@ import { SharedModule } from '../shared/shared.module'
 
 import { FooterComponent } from './footer.component'
 import { HeaderComponent } from './header.component'
-// import { LoginLogoutComponent } from './login-logout.component'
+import { LoginLogoutComponent } from './login-logout.component'
 import { LogoComponent } from './logo.component'
 import { MainComponent } from './main.component'
-// import { NavComponent } from './nav.component'
+import { NavComponent } from './nav.component'
 
 const komponentenExport: Array<Type<any>> = [
     FooterComponent,
     HeaderComponent,
-    // LoginLogoutComponent,
+    LoginLogoutComponent,
     LogoComponent,
     MainComponent,
-    // NavComponent,
+    NavComponent,
 ]
 const komponentenIntern: Array<Type<any>> = []
 

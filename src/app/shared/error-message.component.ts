@@ -8,7 +8,7 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
             <fa-icon [icon]="faExclamationCircle"></fa-icon>
             <span class="font-weight-bold ml-1">{{ text }}</span>
         </div>
-    `
+    `,
 })
 export class ErrorMessageComponent {
     @Input()

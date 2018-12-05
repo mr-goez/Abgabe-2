@@ -22,11 +22,11 @@ const komponentenReExport: Array<Type<any>> = [
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
 ]
 const komponentenExport: Array<Type<any>> = [
     ErrorMessageComponent,
-    WaitingComponent
+    WaitingComponent,
 ]
 const komponentenIntern: Array<Type<any>> = []
 
@@ -35,7 +35,7 @@ const komponentenIntern: Array<Type<any>> = []
 
     declarations: [...komponentenExport, ...komponentenIntern],
 
-    exports: [...komponentenReExport, ...komponentenExport]
+    exports: [...komponentenReExport, ...komponentenExport],
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders {

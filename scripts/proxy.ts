@@ -32,13 +32,13 @@ const on = () => {
     const questions = [
         {
             message: 'Username: ',
-            name: 'username'
+            name: 'username',
         },
         {
             message: 'Password: ',
             name: 'password',
-            type: 'password'
-        }
+            type: 'password',
+        },
     ]
     const setProxy = answers => {
         const { username, password } = answers
@@ -48,7 +48,7 @@ const on = () => {
                 `npm c set https-proxy ${proxyUrl} && ` +
                 `git config --global http.proxy ${proxyUrl} && ` +
                 `git config --global https.proxy ${proxyUrl} && ` +
-                'git config --global url."http://".insteadOf git://'
+                'git config --global url."http://".insteadOf git://',
         )
     }
     inquirer.prompt(questions).then(setProxy)
@@ -61,7 +61,7 @@ const off = () => {
             'npm c delete https-proxy && ' +
             'git config --global --unset http.proxy && ' +
             'git config --global --unset https.proxy && ' +
-            'git config --global --unset url."http://".insteadOf'
+            'git config --global --unset url."http://".insteadOf',
     )
 }
 

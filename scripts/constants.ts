@@ -23,5 +23,5 @@ export const dir = {
     src: 'src',
     dist: 'dist/hska',
     nginx: 'C:/Zimmermann/nginx',
-    webserverConfig: 'config/webserver'
+    webserverConfig: 'config/webserver',
 }
