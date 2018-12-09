@@ -3,8 +3,8 @@ import { Subject } from 'rxjs'
 
 import { log } from '../shared'
 
+import { BasicAuthService } from './basic-auth.service'
 import { CookieService } from './cookie.service'
-import { JwtService } from './jwt.service'
 
 export const ROLLE_ADMIN = 'admin'
 // Spring Security:
@@ -16,7 +16,7 @@ export class AuthService {
     private rollenSubject = new Subject<Array<string>>()
 
     constructor(
-        private readonly jwtService: JwtService,
+        private readonly basicAuthService: BasicAuthService,
         private readonly cookieService: CookieService,
     ) {
         console.log('AuthService.constructor()')
@@ -32,7 +32,7 @@ export class AuthService {
         let rollen: Array<string>
         try {
             // this.basicAuthService.login(username, password)
-            rollen = await this.jwtService.login(username, password)
+            rollen = await this.basicAuthService.login(username, password)
             console.log('AuthService.login()', rollen)
             this.isLoggedInSubject.next(true)
         } catch (e) {
