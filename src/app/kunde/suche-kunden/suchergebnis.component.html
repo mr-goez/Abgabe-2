@@ -33,7 +33,7 @@
         >
             <div class="card-header">
                 <fa-icon [icon]="faFolderOpen"></fa-icon>
-                <span class="ml-1 font-weight-bold">Gefundene B&uuml;cher</span>
+                <span class="ml-1 font-weight-bold">Gefundene Kunden</span>
             </div>
             <div class="card-body">
                 <table
@@ -44,8 +44,8 @@
                         <tr>
                             <th>Nr.</th>
                             <th>ID</th>
-                            <th>Titel</th>
-                            <th>Verlag</th>
+                            <th>Nachname</th>
+                            <th>E-Mail</th>
                             <th>Schlagw&ouml;rter</th>
                             <th>
                                 <span class="sr-only">
@@ -70,7 +70,7 @@
                         >
                             <td>{{ i + 1 }}</td>
                             <td>{{ b._id }}</td>
-                            <td>{{ b.titel }}</td>
+                            <td>{{ b.nachname }}</td>
                             <td>
                                 <span [ngSwitch]="b.verlag">
                                     <span *ngSwitchCase="'IWI_VERLAG'"
@@ -130,7 +130,7 @@
                     <ng-template ngPluralCase="other">
                         <fa-icon [icon]="faInfoCircle"></fa-icon>
                         <span class="ml-1">
-                            Es gibt {{ kunden.length }} B&uuml;cher
+                            Es gibt {{ kunden.length }} Kunden
                         </span>
                     </ng-template>
                 </div>
