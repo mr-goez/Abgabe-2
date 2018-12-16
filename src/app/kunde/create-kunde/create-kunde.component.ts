@@ -83,10 +83,7 @@ export class CreateKundeComponent implements OnInit {
         Validators.required,
         Validators.maxLength(5),
     ])
-    readonly ort: FormControl = new FormControl(
-        undefined,
-        Validators.required,
-    )
+    readonly ort: FormControl = new FormControl(undefined, Validators.required)
 
     showWarning = false
     fertig = false

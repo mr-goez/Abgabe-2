@@ -78,7 +78,7 @@ export class KundeService {
      * @return void
      */
     constructor(
-        private readonly diagrammService: DiagrammService,
+        // private readonly diagrammService: DiagrammService,
         private readonly httpClient: HttpClient,
     ) {
         this.baseUriKunden = `${BASE_URI}/${KUNDEN_PATH}`
@@ -540,16 +540,13 @@ export class KundeService {
     private suchkriterienToHttpParams(suchkriterien: KundeShared): HttpParams {
         let httpParams = new HttpParams()
 
-        if (
-            suchkriterien.nachname !== undefined &&
-            suchkriterien.nachname !== ''
-        ) {
+        if (suchkriterien.nachname !== undefined && suchkriterien.nachname !== '') {
             httpParams = httpParams.set('nachname', suchkriterien.nachname)
         }
-        // if (suchkriterien.art !== undefined) {
-        //     const value = suchkriterien.art
-        //     httpParams = httpParams.set('art', value)
-        // }
+        if (suchkriterien.email !== undefined) {
+            const value = suchkriterien.email
+            httpParams = httpParams.set('email', value)
+        }
         // if (suchkriterien.rating !== undefined) {
         //     const value = suchkriterien.rating.toString()
         //     httpParams = httpParams.set('rating', value)
