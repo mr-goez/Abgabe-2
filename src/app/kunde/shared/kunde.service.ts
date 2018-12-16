@@ -540,7 +540,10 @@ export class KundeService {
     private suchkriterienToHttpParams(suchkriterien: KundeShared): HttpParams {
         let httpParams = new HttpParams()
 
-        if (suchkriterien.nachname !== undefined && suchkriterien.nachname !== '') {
+        if (
+            suchkriterien.nachname !== undefined &&
+            suchkriterien.nachname !== ''
+        ) {
             httpParams = httpParams.set('nachname', suchkriterien.nachname)
         }
         if (suchkriterien.email !== undefined) {

@@ -23,20 +23,25 @@ export interface Umsatz {
 // }
 
 export enum Geschlecht {
-    MÄNNLICH = 'MAENNLICH',
-    WEIBLICH = 'WEIBLICH',
+    MÄNNLICH = 'M',
+    WEIBLICH = 'W',
 }
 
 export enum Familienstand {
-    VERHEIRATET = 'VERHEITATET',
-    GESCHIEDEN = 'GESCHIEDEN',
-    VERWITWET = 'VERWITTWET',
+    VERHEIRATET = 'VH',
+    GESCHIEDEN = 'G',
+    VERWITWET = 'VW',
+    LEDIG= 'L',
 }
 
-// export type adresse = 'plz' & 'ort'
 export interface Adresse {
     plz?: string
     ort?: string
+}
+
+export interface User {
+    username?: string
+    passwort?: string
 }
 
 type UUID = string
@@ -58,6 +63,7 @@ export interface KundeShared {
     interessen?: Array<string>
     adresse?: Adresse
     version?: number
+    user?: User
 }
 
 interface Href {
@@ -118,6 +124,7 @@ export class Kunde {
         public interessen: Array<string> | undefined,
         public adresse: Adresse | undefined,
         public version: number | undefined,
+        public user: User | undefined,
     ) {
         this._id = _id
         this.nachname = nachname
@@ -131,6 +138,7 @@ export class Kunde {
         this.familienstand = familienstand
         this.interessen = interessen
         this.adresse = adresse
+        this.user = user
     }
 
     /**
@@ -175,6 +183,7 @@ export class Kunde {
             kundeServer.interessen,
             kundeServer.adresse,
             version,
+            kundeServer.user,
         )
         console.log('Kunde.fromServer(): kunde=', kunde)
         return kunde
@@ -188,13 +197,13 @@ export class Kunde {
     static fromForm(kundeForm: KundeForm) {
         const interessen: Array<string> = []
         if (kundeForm.lesen === true) {
-            interessen.push('LESEN')
+            interessen.push('L')
         }
         if (kundeForm.reisen === true) {
-            interessen.push('REISEN')
+            interessen.push('R')
         }
         if (kundeForm.sport === true) {
-            interessen.push('SPORT')
+            interessen.push('S')
         }
 
         const kunde = new Kunde(
@@ -211,6 +220,7 @@ export class Kunde {
             kundeForm.interessen,
             kundeForm.adresse,
             kundeForm.version,
+            kundeForm.user,
         )
         console.log('Kunde.fromForm(): kunde=', kunde)
         return kunde
@@ -350,6 +360,7 @@ export class Kunde {
             familienstand: this.familienstand,
             interessen: this.interessen,
             adresse: this.adresse,
+            user: this.user,
         }
     }
 

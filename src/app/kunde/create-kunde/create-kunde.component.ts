@@ -67,14 +67,17 @@ export class CreateKundeComponent implements OnInit {
         undefined,
         Validators.required,
     )
-    readonly betrag: FormControl = new FormControl(undefined)
-    readonly waehrung: FormControl = new FormControl(
+    readonly betrag: FormControl = new FormControl(
         undefined,
-        Validators.maxLength(3),
+        Validators.required,
     )
+    readonly waehrung: FormControl = new FormControl(undefined, [
+        Validators.maxLength(3),
+        Validators.required,
+    ])
     readonly homepage: FormControl = new FormControl(undefined)
     readonly geschlecht: FormControl = new FormControl(
-        'MAENNLICH',
+        'M',
         Validators.required,
     )
     readonly familienstand: FormControl = new FormControl(undefined)
@@ -88,6 +91,9 @@ export class CreateKundeComponent implements OnInit {
     readonly lesen: FormControl = new FormControl(false)
     readonly reisen: FormControl = new FormControl(false)
     readonly sport: FormControl = new FormControl(false)
+
+    readonly username: FormControl = new FormControl(false)
+    readonly password: FormControl = new FormControl(false)
 
     showWarning = false
     fertig = false
@@ -136,6 +142,10 @@ export class CreateKundeComponent implements OnInit {
             lesen: this.lesen,
             reisen: this.reisen,
             sport: this.sport,
+            user: this.formBuilder.group({
+                username: this.username,
+                password: this.password,
+            }),
         })
 
         this.titleService.setTitle('Neuer Kunde')
