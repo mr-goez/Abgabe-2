@@ -63,9 +63,7 @@ export class SuchformularComponent {
         const suchkriterien: any = {
             nachname: this.nachname,
             email: this.email,
-            // art: this.art,
-            // javascript: this.javascript,
-            // typescript: this.typescript,
+            // Or More
         }
         console.log('suchkriterien=', suchkriterien)
 

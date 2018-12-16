@@ -229,15 +229,15 @@ export class Kunde {
     /**
      * Abfrage, ob im Kundetitel der angegebene Teilstring enthalten ist. Dabei
      * wird nicht auf Gross-/Kleinschreibung geachtet.
-     * @param titel Zu &uuml;berpr&uuml;fender Teilstring
+     * @param nachname Zu &uuml;berpr&uuml;fender Teilstring
      * @return true, falls der Teilstring im Kundetitel enthalten ist. Sonst
      *         false.
      */
-    // containsTitel(titel: string) {
-    //     return this.titel === undefined
-    //         ? false
-    //         : this.titel.toLowerCase().includes(titel.toLowerCase())
-    // }
+    containsNachname(nachname: string) {
+        return this.nachname === undefined
+            ? false
+            : this.nachname.toLowerCase().includes(nachname.toLowerCase())
+    }
 
     // /**
     //  * Die Bewertung ("rating") des Kundees um 1 erh&ouml;hen
@@ -303,16 +303,16 @@ export class Kunde {
      * Abfrage, ob es zum Kunde auch Schlagw&ouml;rter gibt.
      * @return true, falls es mindestens ein Schlagwort gibt. Sonst false.
      */
-    // hasSchlagwoerter() {
-    //     if (this.schlagwoerter === undefined) {
-    //         return false
-    //     }
-    //     return this.schlagwoerter.length !== 0
-    // }
+    hasInteressen() {
+        if (this.interessen === undefined) {
+            return false
+        }
+        return this.interessen.length !== 0
+    }
 
     /**
      * Abfrage, ob es zum Kunde das angegebene Schlagwort gibt.
-     * @param schlagwort das zu &uuml;berpr&uuml;fende Schlagwort
+     * @param interesse das zu &uuml;berpr&uuml;fende Schlagwort
      * @return true, falls es das Schlagwort gibt. Sonst false.
      */
     // hasSchlagwort(schlagwort: string) {
@@ -324,8 +324,9 @@ export class Kunde {
 
     /**
      * Aktualisierung der Schlagw&ouml;rter des Kunde-Objekts.
-     * @param javascript ist das Schlagwort JAVASCRIPT gesetzt
-     * @param typescript ist das Schlagwort TYPESCRIPT gesetzt
+     * @param lesen ist das Schlagwort JAVASCRIPT gesetzt
+     * @param schreiben ist das Schlagwort TYPESCRIPT gesetzt
+     * @param sport ist das Schlagwort TYPESCRIPT gesetzt
      */
     // updateSchlagwoerter(javascript: boolean, typescript: boolean) {
     //     this.resetSchlagwoerter()
@@ -372,10 +373,10 @@ export class Kunde {
     //     this.schlagwoerter = []
     // }
 
-    // private addSchlagwort(schlagwort: string) {
-    //     if (this.schlagwoerter === undefined) {
-    //         this.schlagwoerter = []
+    // private addInteressen(interesse: string) {
+    //     if (this.interessen === undefined) {
+    //         this.interessen = []
     //     }
-    //     this.schlagwoerter.push(schlagwort)
+    //     this.interessen.push(interesse)
     // }
 }

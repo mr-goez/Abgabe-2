@@ -20,18 +20,19 @@ import { Component, Input, OnInit } from '@angular/core'
 import { log } from '../../shared'
 
 /**
- * Komponente f&uuml;r das Tag <code>hs-schlagwoerter</code>
+ * Komponente f&uuml;r das Tag <code>hs-interessen</code>
  */
 @Component({
-    selector: 'hs-details-schlagwoerter',
+    selector: 'hs-details-interessen',
     template: `
-        <div class="form-group row" *ngFor="let schlagwort of values">
+        <div class="form-group row" *ngFor="let interesse of values">
             <div class="col col-11">
                 <div class="checkbox">
                     <input type="checkbox" checked disabled class="checkbox" />
-                    <label [ngSwitch]="schlagwort">
-                        <span *ngSwitchCase="'JAVASCRIPT'">JavaScript</span>
-                        <span *ngSwitchCase="'TYPESCRIPT'">TypeScript</span>
+                    <label [ngSwitch]="interesse">
+                        <span *ngSwitchCase="'LESEN'">Lesen</span>
+                        <span *ngSwitchCase="'SCHREIBEN'">Schreiben</span>
+                        <span *ngSwitchCase="'SPORT'">Sport</span>
                     </label>
                     <div></div>
                 </div>
@@ -39,14 +40,14 @@ import { log } from '../../shared'
         </div>
     `,
 })
-export class DetailsSchlagwoerterComponent implements OnInit {
-    // <hs-schlagwoerter [values]="buch.schlagwoerter">
+export class DetailsInteressenComponent implements OnInit {
+    // <hs-interessen [values]="buch.interessen">
     // Decorator fuer ein Attribut. Siehe InputMetadata
     @Input()
     values!: Array<string>
 
     constructor() {
-        console.log('DetailsSchlagwoerterComponent.constructor()')
+        console.log('DetailsInteressenComponent.constructor()')
     }
 
     @log
@@ -55,6 +56,6 @@ export class DetailsSchlagwoerterComponent implements OnInit {
     }
 
     toString() {
-        return 'DetailsSchlagwoerterComponent'
+        return 'DetailsInteressenComponent'
     }
 }
