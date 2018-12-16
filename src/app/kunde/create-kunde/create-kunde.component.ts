@@ -17,7 +17,7 @@
 
 import { Component, OnInit } from '@angular/core'
 // Bereitgestellt durch das ReactiveFormsModule (s. Re-Export im SharedModule)
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup, NG_VALIDATORS, Validators } from '@angular/forms'
 import { Title } from '@angular/platform-browser'
 // Bereitgestellt durch das RouterModule (s. Re-Export im SharedModule)
 import { Router } from '@angular/router'
@@ -52,30 +52,31 @@ export class CreateKundeComponent implements OnInit {
     readonly nachname: FormControl = new FormControl(undefined, [
         Validators.required,
         Validators.minLength(2),
-        Validators.pattern(/^\w.*$/),
+        Validators.pattern(/\b[A-ZÄÖÜ][a-zÄÖÜäöüß]+\b/),
     ])
     readonly email: FormControl = new FormControl(undefined, [
         Validators.required,
         Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/),
     ])
-    readonly kategorie: FormControl = new FormControl(
-        undefined,
+    readonly kategorie: FormControl = new FormControl(undefined, [
         Validators.required,
-    )
+        Validators.max(9),
+        Validators.min(1),
+    ])
     readonly newsletter: FormControl = new FormControl(false)
-    readonly geburtsdatum: FormControl = new FormControl(
-        undefined,
+    readonly geburtsdatum: FormControl = new FormControl(undefined, [
         Validators.required,
-    )
-    readonly betrag: FormControl = new FormControl(
-        undefined,
+    ])
+    readonly betrag: FormControl = new FormControl(undefined, [
         Validators.required,
-    )
+        Validators.pattern(/^[0-9]+\.[0-9]{2}$/),
+    ])
     readonly waehrung: FormControl = new FormControl(undefined, [
         Validators.maxLength(3),
         Validators.required,
+        Validators.pattern(/^[A-Z]+/),
     ])
-    readonly homepage: FormControl = new FormControl(undefined)
+    readonly homepage: FormControl = new FormControl('https://')
     readonly geschlecht: FormControl = new FormControl(
         'M',
         Validators.required,
@@ -85,6 +86,7 @@ export class CreateKundeComponent implements OnInit {
     readonly plz: FormControl = new FormControl(undefined, [
         Validators.required,
         Validators.maxLength(5),
+        Validators.pattern(/^[0-9]*$/),
     ])
     readonly ort: FormControl = new FormControl(undefined, Validators.required)
 
@@ -92,8 +94,14 @@ export class CreateKundeComponent implements OnInit {
     readonly reisen: FormControl = new FormControl(false)
     readonly sport: FormControl = new FormControl(false)
 
-    readonly username: FormControl = new FormControl(false)
-    readonly password: FormControl = new FormControl(false)
+    readonly username: FormControl = new FormControl(
+        undefined,
+        Validators.required,
+    )
+    readonly password: FormControl = new FormControl(
+        undefined,
+        Validators.required,
+    )
 
     showWarning = false
     fertig = false

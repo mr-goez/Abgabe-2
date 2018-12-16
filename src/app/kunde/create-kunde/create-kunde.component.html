@@ -96,8 +96,7 @@
                         >
                             <fa-icon [icon]="faExclamationCircle"></fa-icon>
                             <span class="ml-1">
-                                Ein Nachname muss mit einem Buchstaben oder
-                                einer Ziffer beginnen.
+                                Ein Nachname muss mit einem Großbuchstaben beginnen
                             </span>
                         </div>
                     </div>
@@ -114,7 +113,23 @@
                             class="form-control"
                             type="date"
                             formControlName="geburtsdatum"
+                            [class.border-danger]="geburtsdatuminvalid && geburtsdatum.touched"
                         />
+                        <div
+                            *ngIf="geburtsdatum.invalid && geburtsdatum.touched"
+                            class="alert alert-danger"
+                        >
+                            <div
+                                *ngIf="
+                                geburtsdatum.errors !== null && geburtsdatum.errors.required
+                                "
+                            >
+                                <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                                <span class="ml-1">
+                                    Ein Geburtsdatum muss eingegeben werden.
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -234,6 +249,16 @@
                                 Eine Email muss angegeben werden, z.B. mustermail@muster.de
                             </span>
                         </div>
+                        <div
+                            *ngIf="
+                            email.errors !== null && email.errors.pattern
+                            "
+                        >
+                            <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                            <span class="ml-1">
+                                Das Format der Email ist falsch
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -244,14 +269,32 @@
                     <label class="col col-3 form-control-label" for="betragInput">
                         Betrag
                     </label>
-                        <div class="col col-9">
-                            <input 
-                            id="betragInput"
-                            placeholder="z.B. 20"  
-                            formControlName="betrag" 
-                            class="form-control"
-                            />
+                    <div class="col col-9">
+                        <input 
+                        id="betragInput"
+                        placeholder="z.B. 20.00"  
+                        formControlName="betrag" 
+                        class="form-control"
+                        [class.border-danger]="
+                                betrag.invalid && betrag.touched
+                            "
+                        />
+                        <div
+                            *ngIf="betrag.invalid && betrag.touched"
+                            class="alert alert-danger"
+                        >
+                            <div
+                                *ngIf="
+                                betrag.errors !== null && betrag.errors.pattern
+                                "
+                            >
+                                <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                                <span class="ml-1">
+                                    Das Format ist falsch!
+                                </span>
+                            </div>
                         </div>
+                    </div>
                     <label for="waehrungInput"class="col col-3 form-control-label" >
                         Währung
                     </label>
@@ -260,7 +303,10 @@
                         id="waehrungInput"
                         placeholder="z.B. EUR" 
                         formControlName="waehrung" 
-                        class="form-control"                        
+                        class="form-control"
+                        [class.border-danger]="
+                                    waehrung.invalid && waehrung.touched
+                                "                        
                         />
                     </div>     
                 </div>
@@ -309,7 +355,7 @@
                         <div class="input-group">
                             <input
                                 id="kategorieInput"
-                                placeholder="Kategorie, z.B. 1"
+                                placeholder="Kategorie, 1-9"
                                 required
                                 type="number"
                                 class="form-control"
@@ -350,7 +396,11 @@
                                 id="homepageInput"
                                 placeholder="Homepage?"                                    
                                 class="form-control"
-                                formControlName="homepage"                                    
+                                formControlName="homepage" 
+                                type="url"
+                                [class.border-danger]="
+                                    kategorie.invalid && kategorie.touched
+                                "                                   
                             />                          
                         </div>                        
                     </div>
@@ -370,6 +420,9 @@
                             placeholder="z.B. 12345" 
                             formControlName="plz" 
                             class="form-control"
+                            [class.border-danger]="
+                                    plz.invalid && plz.touched
+                                "
                             />
                         </div>  
                         <label class="col col-3 form-control-label" for="ortInput">
@@ -381,16 +434,19 @@
                             placeholder="Ort"
                             formControlName="ort" 
                             class="form-control"
+                            [class.border-danger]="
+                                    ort.invalid && ort.touched
+                                "
                             />
                         </div>                            
                     </div>
                 </div>
 
                 <div formGroupName="user">
-                        <label>User</label>
+                        <label>User *</label>
                         <div class="form-group row col">
                             <label class="col col-3 form-control-label" for="usernameInput">
-                                Username *
+                                Username
                             </label>
                                 <div class="col col-9">
                                     <input 
@@ -401,13 +457,14 @@
                                     />
                                 </div>
                             <label for="waehrungInput"class="col col-3 form-control-label" >
-                                Passwort*
+                                Passwort
                             </label>
                             <div class="col col-9">
                                 <input 
                                 id="passwordInput"                                 
                                 formControlName="password" 
-                                class="form-control"                        
+                                class="form-control" 
+                                type ="password"                       
                                 />
                             </div>     
                         </div>
