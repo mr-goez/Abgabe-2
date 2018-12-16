@@ -56,27 +56,27 @@
         <form (submit)="onFind()" role="form">
             <div class="form-group row">
                 <label for="titelInput" class="col col-2 form-control-label">
-                    Titel
+                    Nachname
                 </label>
                 <div class="col col-10">
                     <!-- type="search" funktioniert nicht mit Bootstrap -->
                     <input
                         id="titelInput"
-                        placeholder="Den Titel oder einen Teil davon eingeben"
+                        placeholder="Den Nachnamen oder einen Teil davon eingeben"
                         class="form-control"
-                        [(ngModel)]="titel"
-                        name="titel"
+                        [(ngModel)]="nachname"
+                        name="nachname"
                     />
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col col-2 form-control-label">Verlag</label>
+                <label class="col col-2 form-control-label">E-Mail</label>
                 <div class="col col-10">
                     <select
                         class="form-control"
-                        [(ngModel)]="verlag"
-                        name="verlag"
+                        [(ngModel)]="email"
+                        name="email"
                     >
                         <option value=""></option>
                         <option value="IWI_VERLAG">Iwi Verlag</option>
@@ -86,33 +86,33 @@
             </div>
 
             <div class="form-group row">
-                <label class="col col-2 form-control-label">Art</label>
+                <label class="col col-2 form-control-label">Geschlecht</label>
                 <div class="col col-10">
                     <div class="radio">
                         <input
                             type="radio"
                             id="druckausgabeInput"
-                            [(ngModel)]="art"
-                            name="art"
-                            value="DRUCKAUSGABE"
+                            [(ngModel)]="geschlecht"
+                            name="geschlecht"
+                            value="MAENNLICH"
                         />
                         <label
                             class="radio-inline ml-1"
                             for="druckausgabeInput"
                         >
-                            Druckausgabe
+                            Maennlich
                         </label>
                     </div>
                     <div class="radio">
                         <input
                             type="radio"
                             id="kindleInput"
-                            [(ngModel)]="art"
-                            name="art"
-                            value="KINDLE"
+                            [(ngModel)]="geschlecht"
+                            name="geschlecht"
+                            value="WEIBLICH"
                         />
                         <label class="radio-inline ml-1" for="kindleInput">
-                            Kindle
+                            Weiblich
                         </label>
                     </div>
                 </div>
