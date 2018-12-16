@@ -62,7 +62,7 @@ export class SuchformularComponent {
     onFind() {
         const suchkriterien: any = {
             titel: this.nachname,
-            verlag: this.email,
+            email: this.email,
             // art: this.art,
             // javascript: this.javascript,
             // typescript: this.typescript,

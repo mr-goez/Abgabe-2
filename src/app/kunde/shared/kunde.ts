@@ -11,17 +11,32 @@ import 'moment/locale/de'
 
 moment.locale('de')
 
-const MIN_RATING = 0
-const MAX_RATING = 5
-
-export enum Verlag {
-    IWI_VERLAG = 'IWI_VERLAG',
-    HSKA_VERLAG = 'HSKA_VERLAG',
+export interface Umsatz {
+    betrag?: number
+    waehrung?: string
 }
 
-export enum KundeArt {
-    KINDLE = 'KINDLE',
-    DRUCKAUSGABE = 'DRUCKAUSGABE',
+export enum Interesse {
+    SPORT = 'SPORT',
+    LESEN = 'LESEN',
+    REISEN = 'REISEN',
+}
+
+export enum Geschlecht {
+    MÄNNLICH = 'MAENNLICH',
+    WEIBLICH = 'WEIBLICH',
+}
+
+export enum Familienstand {
+    VERHEIRATET = 'VERHEITATET',
+    GESCHIEDEN = 'GESCHIEDEN',
+    VERWITWET = 'VERWITTWET',
+}
+
+// export type adresse = 'plz' & 'ort'
+export interface Adresse {
+    plz?: string
+    ort?: string
 }
 
 type UUID = string
@@ -32,13 +47,16 @@ type UUID = string
 export interface KundeShared {
     _id?: UUID
     nachname?: string
-    verlag?: Verlag
-    art?: KundeArt
-    preis?: number
-    rabatt?: number
-    datum?: string
-    lieferbar?: boolean
-    isbn?: string
+    email?: string
+    kategorie?: number
+    newsletter?: boolean
+    geburtsdatum?: Date
+    umsatz?: Umsatz
+    homepage?: string
+    geschlecht?: Geschlecht
+    familienstand?: Familienstand
+    interessen?: Array<Interesse>
+    adresse?: Adresse
     version?: number
 }
 
@@ -59,8 +77,8 @@ interface SelfLink {
  * </ul>
  */
 export interface KundeServer extends KundeShared {
-    rating?: number
-    schlagwoerter?: Array<string>
+    // rating?: number
+    // schlagwoerter?: Array<string>
     links?: any
     _links?: SelfLink
 }
@@ -72,57 +90,48 @@ export interface KundeServer extends KundeShared {
  *  <li> au&szlig;erdem Strings f&uuml;r Eingabefelder f&uuml;r Zahlen.
  * </ul>
  */
-export interface KundeForm extends KundeShared {
-    rating: string
-    javascript?: boolean
-    typescript?: boolean
-}
+// export interface KundeForm extends KundeShared {
+//     rating: string
+//      javascript?: boolean
+//      typescript?: boolean
+// }
 
 /**
  * Model als Plain-Old-JavaScript-Object (POJO) fuer die Daten *UND*
  * Functions fuer Abfragen und Aenderungen.
  */
 export class Kunde {
-    ratingArray: Array<boolean> = []
+    // ratingArray: Array<boolean> = []
 
     // wird aufgerufen von fromServer() oder von fromForm()
     private constructor(
         // tslint:disable-next-line:variable-name
         public _id: UUID | undefined,
-        public titel: string | undefined,
-        public rating: number | undefined,
-        public art: KundeArt | undefined,
-        public verlag: Verlag | undefined,
-        public datum: moment.Moment | undefined,
-        public preis: number | undefined,
-        public rabatt: number | undefined,
-        public lieferbar: boolean | undefined,
-        public schlagwoerter: Array<string> | undefined,
-        public isbn: string | undefined,
+        public nachname: string | undefined,
+        public email: string | undefined,
+        public kategorie: number | undefined,
+        public newsletter: boolean | undefined,
+        public geburtsdatum: Date | undefined,
+        public umsatz: Umsatz | undefined,
+        public homepage: string | undefined,
+        public geschlecht: Geschlecht | undefined,
+        public familienstand: Familienstand | undefined,
+        public interessen: Array<Interesse> | undefined,
+        public adresse: Adresse | undefined,
         public version: number | undefined,
     ) {
         this._id = _id
-        this.titel = titel
-        this.rating = rating
-        this.art = art
-        this.verlag = verlag
-        this.datum =
-            datum !== undefined ? datum : moment(new Date().toISOString())
-        this.preis = preis
-        this.rabatt = rabatt
-        this.lieferbar = lieferbar
-
-        this.schlagwoerter =
-            schlagwoerter === undefined
-                ? []
-                : (this.schlagwoerter = schlagwoerter)
-        this.ratingArray =
-            rating === undefined
-                ? Array(MAX_RATING - MIN_RATING).fill(false)
-                : Array(rating - MIN_RATING)
-                      .fill(true)
-                      .concat(Array(MAX_RATING - rating).fill(false))
-        this.isbn = isbn
+        this.nachname = nachname
+        this.email = email
+        this.kategorie = kategorie
+        this.newsletter = newsletter
+        this.geburtsdatum = geburtsdatum
+        this.umsatz = umsatz
+        this.homepage = homepage
+        this.geschlecht = geschlecht
+        this.familienstand = familienstand
+        this.interessen = interessen
+        this.adresse = adresse
     }
 
     /**
@@ -153,23 +162,23 @@ export class Kunde {
             version = Number.parseInt(versionStr, 10)
         }
 
-        let datum: moment.Moment | undefined
-        if (kundeServer.datum !== undefined) {
-            datum = moment(kundeServer.datum)
-        }
-
+        // let datum: moment.Moment | undefined
+        // if (kundeServer.datum !== undefined) {
+        //     datum = moment(kundeServer.datum)
+        // }
         const kunde = new Kunde(
             id,
             kundeServer.nachname,
-            kundeServer.rating,
-            kundeServer.art,
-            kundeServer.verlag,
-            datum,
-            kundeServer.preis,
-            kundeServer.rabatt,
-            kundeServer.lieferbar,
-            kundeServer.schlagwoerter,
-            kundeServer.isbn,
+            kundeServer.email,
+            kundeServer.kategorie,
+            kundeServer.newsletter,
+            kundeServer.geburtsdatum,
+            kundeServer.umsatz,
+            kundeServer.homepage,
+            kundeServer.geschlecht,
+            kundeServer.familienstand,
+            kundeServer.interessen,
+            kundeServer.adresse,
             version,
         )
         console.log('Kunde.fromServer(): kunde=', kunde)
@@ -181,47 +190,24 @@ export class Kunde {
      * @param kunde JSON-Objekt mit Daten vom Formular
      * @return Das initialisierte Kunde-Objekt
      */
-    static fromForm(kundeForm: KundeForm) {
-        const schlagwoerter: Array<string> = []
-        if (kundeForm.javascript === true) {
-            schlagwoerter.push('JAVASCRIPT')
-        }
-        if (kundeForm.typescript === true) {
-            schlagwoerter.push('TYPESCRIPT')
-        }
-
-        const datumMoment =
-            kundeForm.datum === undefined ? undefined : moment(kundeForm.datum)
-
-        const rabatt =
-            kundeForm.rabatt === undefined ? 0 : kundeForm.rabatt / 100
+    static fromForm(kundeForm: KundeShared) {
         const kunde = new Kunde(
             kundeForm._id,
             kundeForm.nachname,
-            +kundeForm.rating,
-            kundeForm.art,
-            kundeForm.verlag,
-            datumMoment,
-            kundeForm.preis,
-            rabatt,
-            kundeForm.lieferbar,
-            schlagwoerter,
-            kundeForm.isbn,
+            kundeForm.email,
+            kundeForm.kategorie,
+            kundeForm.newsletter,
+            kundeForm.geburtsdatum,
+            kundeForm.umsatz,
+            kundeForm.homepage,
+            kundeForm.geschlecht,
+            kundeForm.familienstand,
+            kundeForm.interessen,
+            kundeForm.adresse,
             kundeForm.version,
         )
         console.log('Kunde.fromForm(): kunde=', kunde)
         return kunde
-    }
-
-    // http://momentjs.com
-    get datumFormatted() {
-        return this.datum === undefined
-            ? undefined
-            : this.datum.format('Do MMM YYYY')
-    }
-
-    get datumFromNow() {
-        return this.datum === undefined ? undefined : this.datum.fromNow()
     }
 
     /**
@@ -231,38 +217,38 @@ export class Kunde {
      * @return true, falls der Teilstring im Kundetitel enthalten ist. Sonst
      *         false.
      */
-    containsTitel(titel: string) {
-        return this.titel === undefined
-            ? false
-            : this.titel.toLowerCase().includes(titel.toLowerCase())
-    }
+    // containsTitel(titel: string) {
+    //     return this.titel === undefined
+    //         ? false
+    //         : this.titel.toLowerCase().includes(titel.toLowerCase())
+    // }
 
-    /**
-     * Die Bewertung ("rating") des Kundees um 1 erh&ouml;hen
-     */
-    rateUp() {
-        if (this.rating !== undefined && this.rating < MAX_RATING) {
-            this.rating++
-        }
-    }
+    // /**
+    //  * Die Bewertung ("rating") des Kundees um 1 erh&ouml;hen
+    //  */
+    // rateUp() {
+    //     if (this.rating !== undefined && this.rating < MAX_RATING) {
+    //         this.rating++
+    //     }
+    // }
 
-    /**
-     * Die Bewertung ("rating") des Kundees um 1 erniedrigen
-     */
-    rateDown() {
-        if (this.rating !== undefined && this.rating > MIN_RATING) {
-            this.rating--
-        }
-    }
+    // /**
+    //  * Die Bewertung ("rating") des Kundees um 1 erniedrigen
+    //  */
+    // rateDown() {
+    //     if (this.rating !== undefined && this.rating > MIN_RATING) {
+    //         this.rating--
+    //     }
+    // }
 
     /**
      * Abfrage, ob das Kunde dem angegebenen Verlag zugeordnet ist.
      * @param verlag der Name des Verlags
      * @return true, falls das Kunde dem Verlag zugeordnet ist. Sonst false.
      */
-    hasVerlag(verlag: string) {
-        return this.verlag === verlag
-    }
+    // hasVerlag(verlag: string) {
+    //     return this.verlag === verlag
+    // }
 
     /**
      * Aktualisierung der Stammdaten des Kunde-Objekts.
@@ -273,67 +259,67 @@ export class Kunde {
      * @param preis Der neue Preis
      * @param rabatt Der neue Rabatt
      */
-    updateStammdaten(
-        titel: string,
-        art: KundeArt,
-        verlag: Verlag,
-        rating: number,
-        datum: moment.Moment | undefined,
-        preis: number | undefined,
-        rabatt: number | undefined,
-        isbn: string,
-    ) {
-        this.titel = titel
-        this.art = art
-        this.verlag = verlag
-        this.rating = rating
-        this.ratingArray =
-            rating === undefined
-                ? Array(MAX_RATING - MIN_RATING).fill(false)
-                : Array(rating - MIN_RATING).fill(true)
-        this.datum = datum
-        this.preis = preis
-        this.rabatt = rabatt
-        this.isbn = isbn
-    }
+    // updateStammdaten(
+    //     titel: string,
+    //     art: KundeArt,
+    //     verlag: Verlag,
+    //     rating: number,
+    //     datum: moment.Moment | undefined,
+    //     preis: number | undefined,
+    //     rabatt: number | undefined,
+    //     isbn: string,
+    // ) {
+    //     this.titel = titel
+    //     this.art = art
+    //     this.verlag = verlag
+    //     this.rating = rating
+    //     this.ratingArray =
+    //         rating === undefined
+    //             ? Array(MAX_RATING - MIN_RATING).fill(false)
+    //             : Array(rating - MIN_RATING).fill(true)
+    //     this.datum = datum
+    //     this.preis = preis
+    //     this.rabatt = rabatt
+    //     this.isbn = isbn
+    // }
 
     /**
      * Abfrage, ob es zum Kunde auch Schlagw&ouml;rter gibt.
      * @return true, falls es mindestens ein Schlagwort gibt. Sonst false.
      */
-    hasSchlagwoerter() {
-        if (this.schlagwoerter === undefined) {
-            return false
-        }
-        return this.schlagwoerter.length !== 0
-    }
+    // hasSchlagwoerter() {
+    //     if (this.schlagwoerter === undefined) {
+    //         return false
+    //     }
+    //     return this.schlagwoerter.length !== 0
+    // }
 
     /**
      * Abfrage, ob es zum Kunde das angegebene Schlagwort gibt.
      * @param schlagwort das zu &uuml;berpr&uuml;fende Schlagwort
      * @return true, falls es das Schlagwort gibt. Sonst false.
      */
-    hasSchlagwort(schlagwort: string) {
-        if (this.schlagwoerter === undefined) {
-            return false
-        }
-        return this.schlagwoerter.includes(schlagwort)
-    }
+    // hasSchlagwort(schlagwort: string) {
+    //     if (this.schlagwoerter === undefined) {
+    //         return false
+    //     }
+    //     return this.schlagwoerter.includes(schlagwort)
+    // }
 
     /**
      * Aktualisierung der Schlagw&ouml;rter des Kunde-Objekts.
      * @param javascript ist das Schlagwort JAVASCRIPT gesetzt
      * @param typescript ist das Schlagwort TYPESCRIPT gesetzt
      */
-    updateSchlagwoerter(javascript: boolean, typescript: boolean) {
-        this.resetSchlagwoerter()
-        if (javascript) {
-            this.addSchlagwort('JAVASCRIPT')
-        }
-        if (typescript) {
-            this.addSchlagwort('TYPESCRIPT')
-        }
-    }
+    // updateSchlagwoerter(javascript: boolean, typescript: boolean) {
+    //     this.resetSchlagwoerter()
+    //     if (javascript) {
+    //         this.addSchlagwort('JAVASCRIPT')
+    //     }
+    //     if (typescript) {
+    //         this.addSchlagwort('TYPESCRIPT')
+    //     }
+    // }
 
     /**
      * Konvertierung des Kundeobjektes in ein JSON-Objekt f&uuml;r den RESTful
@@ -341,22 +327,23 @@ export class Kunde {
      * @return Das JSON-Objekt f&uuml;r den RESTful Web Service
      */
     toJSON(): KundeServer {
-        const datum =
-            this.datum === undefined
-                ? undefined
-                : this.datum.format('YYYY-MM-DD')
+        // const datum =
+        //     this.datum === undefined
+        //         ? undefined
+        //         : this.datum.format('YYYY-MM-DD')
         return {
             _id: this._id,
-            nachname: this.titel,
-            rating: this.rating,
-            art: this.art,
-            verlag: this.verlag,
-            datum,
-            preis: this.preis,
-            rabatt: this.rabatt,
-            lieferbar: this.lieferbar,
-            schlagwoerter: this.schlagwoerter,
-            isbn: this.isbn,
+            nachname: this.nachname,
+            email: this.email,
+            kategorie: this.kategorie,
+            newsletter: this.newsletter,
+            geburtsdatum: this.geburtsdatum,
+            umsatz: this.umsatz,
+            homepage: this.homepage,
+            geschlecht: this.geschlecht,
+            familienstand: this.familienstand,
+            interessen: this.interessen,
+            adresse: this.adresse,
         }
     }
 
@@ -364,14 +351,14 @@ export class Kunde {
         return JSON.stringify(this, null, 2)
     }
 
-    private resetSchlagwoerter() {
-        this.schlagwoerter = []
-    }
+    // private resetSchlagwoerter() {
+    //     this.schlagwoerter = []
+    // }
 
-    private addSchlagwort(schlagwort: string) {
-        if (this.schlagwoerter === undefined) {
-            this.schlagwoerter = []
-        }
-        this.schlagwoerter.push(schlagwort)
-    }
+    // private addSchlagwort(schlagwort: string) {
+    //     if (this.schlagwoerter === undefined) {
+    //         this.schlagwoerter = []
+    //     }
+    //     this.schlagwoerter.push(schlagwort)
+    // }
 }
