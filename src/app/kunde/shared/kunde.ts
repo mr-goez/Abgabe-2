@@ -90,9 +90,9 @@ export interface KundeServer extends KundeShared {
  * </ul>
  */
 export interface KundeForm extends KundeShared {
-     sport?: boolean
-     lesen?: boolean
-     reisen?: boolean
+    sport?: boolean
+    lesen?: boolean
+    reisen?: boolean
 }
 
 /**
@@ -186,7 +186,6 @@ export class Kunde {
      * @return Das initialisierte Kunde-Objekt
      */
     static fromForm(kundeForm: KundeForm) {
-
         const interessen: Array<string> = []
         if (kundeForm.lesen === true) {
             interessen.push('LESEN')

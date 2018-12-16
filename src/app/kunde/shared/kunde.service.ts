@@ -34,7 +34,7 @@ import { filter, map } from 'rxjs/operators'
 
 import { BASE_URI, KUNDEN_PATH, log } from '../../shared'
 // Aus SharedModule als Singleton exportiert
-import { DiagrammService } from '../../shared/diagramm.service'
+// import { DiagrammService } from '../../shared/diagramm.service'
 
 import { Kunde, KundeServer, KundeShared } from './kunde'
 
@@ -78,7 +78,7 @@ export class KundeService {
      * @return void
      */
     constructor(
-        private readonly diagrammService: DiagrammService,
+        // private readonly diagrammService: DiagrammService,
         private readonly httpClient: HttpClient,
     ) {
         this.baseUriKunden = `${BASE_URI}/${KUNDEN_PATH}`
