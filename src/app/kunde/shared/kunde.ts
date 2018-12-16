@@ -16,11 +16,11 @@ export interface Umsatz {
     waehrung?: string
 }
 
-export enum Interesse {
-    SPORT = 'SPORT',
-    LESEN = 'LESEN',
-    REISEN = 'REISEN',
-}
+// export enum Interesse {
+//     SPORT = 'SPORT',
+//     LESEN = 'LESEN',
+//     REISEN = 'REISEN',
+// }
 
 export enum Geschlecht {
     MÄNNLICH = 'MAENNLICH',
@@ -55,7 +55,7 @@ export interface KundeShared {
     homepage?: string
     geschlecht?: Geschlecht
     familienstand?: Familienstand
-    interessen?: Array<Interesse>
+    interessen?: Array<string>
     adresse?: Adresse
     version?: number
 }
@@ -77,7 +77,6 @@ interface SelfLink {
  * </ul>
  */
 export interface KundeServer extends KundeShared {
-    // rating?: number
     // schlagwoerter?: Array<string>
     links?: any
     _links?: SelfLink
@@ -90,11 +89,11 @@ export interface KundeServer extends KundeShared {
  *  <li> au&szlig;erdem Strings f&uuml;r Eingabefelder f&uuml;r Zahlen.
  * </ul>
  */
-// export interface KundeForm extends KundeShared {
-//     rating: string
-//      javascript?: boolean
-//      typescript?: boolean
-// }
+export interface KundeForm extends KundeShared {
+     sport?: boolean
+     lesen?: boolean
+     reisen?: boolean
+}
 
 /**
  * Model als Plain-Old-JavaScript-Object (POJO) fuer die Daten *UND*
@@ -116,7 +115,7 @@ export class Kunde {
         public homepage: string | undefined,
         public geschlecht: Geschlecht | undefined,
         public familienstand: Familienstand | undefined,
-        public interessen: Array<Interesse> | undefined,
+        public interessen: Array<string> | undefined,
         public adresse: Adresse | undefined,
         public version: number | undefined,
     ) {
@@ -162,10 +161,6 @@ export class Kunde {
             version = Number.parseInt(versionStr, 10)
         }
 
-        // let datum: moment.Moment | undefined
-        // if (kundeServer.datum !== undefined) {
-        //     datum = moment(kundeServer.datum)
-        // }
         const kunde = new Kunde(
             id,
             kundeServer.nachname,
@@ -190,7 +185,19 @@ export class Kunde {
      * @param kunde JSON-Objekt mit Daten vom Formular
      * @return Das initialisierte Kunde-Objekt
      */
-    static fromForm(kundeForm: KundeShared) {
+    static fromForm(kundeForm: KundeForm) {
+
+        const interessen: Array<string> = []
+        if (kundeForm.lesen === true) {
+            interessen.push('LESEN')
+        }
+        if (kundeForm.reisen === true) {
+            interessen.push('REISEN')
+        }
+        if (kundeForm.sport === true) {
+            interessen.push('SPORT')
+        }
+
         const kunde = new Kunde(
             kundeForm._id,
             kundeForm.nachname,

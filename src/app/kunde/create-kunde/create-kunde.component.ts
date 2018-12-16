@@ -83,7 +83,13 @@ export class CreateKundeComponent implements OnInit {
         Validators.required,
         Validators.maxLength(5),
     ])
-    readonly ort: FormControl = new FormControl(undefined, Validators.required)
+    readonly ort: FormControl = new FormControl(
+        undefined,
+        Validators.required,
+    )
+    readonly lesen: FormControl = new FormControl(false)
+    readonly reisen: FormControl = new FormControl(false)
+    readonly sport: FormControl = new FormControl(false)
 
     showWarning = false
     fertig = false
@@ -129,6 +135,9 @@ export class CreateKundeComponent implements OnInit {
                 plz: this.plz,
                 ort: this.ort,
             }),
+            lesen: this.lesen,
+            reisen: this.reisen,
+            sport: this.sport,
         })
 
         this.titleService.setTitle('Neuer Kunde')
