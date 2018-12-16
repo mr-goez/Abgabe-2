@@ -135,6 +135,9 @@ export class CreateKundeComponent implements OnInit {
                 plz: this.plz,
                 ort: this.ort,
             }),
+            lesen: this.lesen,
+            reisen: this.reisen,
+            sport: this.sport,
         })
 
         this.titleService.setTitle('Neuer Kunde')
