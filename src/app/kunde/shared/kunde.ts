@@ -77,7 +77,6 @@ interface SelfLink {
  * </ul>
  */
 export interface KundeServer extends KundeShared {
-    // rating?: number
     // schlagwoerter?: Array<string>
     links?: any
     _links?: SelfLink
@@ -91,9 +90,9 @@ export interface KundeServer extends KundeShared {
  * </ul>
  */
 // export interface KundeForm extends KundeShared {
-//     rating: string
-//      javascript?: boolean
-//      typescript?: boolean
+//      sport?: boolean
+//      lesen?: boolean
+//      reisen?: boolean
 // }
 
 /**
@@ -162,10 +161,6 @@ export class Kunde {
             version = Number.parseInt(versionStr, 10)
         }
 
-        // let datum: moment.Moment | undefined
-        // if (kundeServer.datum !== undefined) {
-        //     datum = moment(kundeServer.datum)
-        // }
         const kunde = new Kunde(
             id,
             kundeServer.nachname,
@@ -191,6 +186,15 @@ export class Kunde {
      * @return Das initialisierte Kunde-Objekt
      */
     static fromForm(kundeForm: KundeShared) {
+
+        // const interessen: Array<string> = []
+        // if (kundeForm.javascript === true) {
+        //     schlagwoerter.push('JAVASCRIPT')
+        // }
+        // if (kundeForm.typescript === true) {
+        //     schlagwoerter.push('TYPESCRIPT')
+        // }
+
         const kunde = new Kunde(
             kundeForm._id,
             kundeForm.nachname,
