@@ -33,7 +33,7 @@
         >
             <div class="card-header">
                 <fa-icon [icon]="faFolderOpen"></fa-icon>
-                <span class="ml-1 font-weight-bold">Gefundene B&uuml;cher</span>
+                <span class="ml-1 font-weight-bold">Gefundene Kunden</span>
             </div>
             <div class="card-body">
                 <table
@@ -44,9 +44,10 @@
                         <tr>
                             <th>Nr.</th>
                             <th>ID</th>
-                            <th>Titel</th>
-                            <th>Verlag</th>
-                            <th>Schlagw&ouml;rter</th>
+                            <th>Nachname</th>
+                            <th>E-Mail</th>
+                            <th>Geburtsdatum</th>
+                            <th>Geschlecht</th>
                             <th>
                                 <span class="sr-only">
                                     Spalte f&uuml;r Details
@@ -70,30 +71,10 @@
                         >
                             <td>{{ i + 1 }}</td>
                             <td>{{ b._id }}</td>
-                            <td>{{ b.titel }}</td>
-                            <td>
-                                <span [ngSwitch]="b.verlag">
-                                    <span *ngSwitchCase="'IWI_VERLAG'"
-                                        >Iwi Verlag</span
-                                    >
-                                    <span *ngSwitchCase="'HSKA_VERLAG'">
-                                        Hska Verlag
-                                    </span>
-                                    <span *ngSwitchDefault>unbekannt</span>
-                                </span>
-                            </td>
-                            <td>
-                                <span *ngFor="let sw of b.schlagwoerter">
-                                    <span [ngSwitch]="sw">
-                                        <span *ngSwitchCase="'JAVASCRIPT'">
-                                            JavaScript<br />
-                                        </span>
-                                        <span *ngSwitchCase="'TYPESCRIPT'">
-                                            TypeScript
-                                        </span>
-                                    </span>
-                                </span>
-                            </td>
+                            <td>{{ b.nachname }}</td>
+                            <td>{{ b.email }}</td>
+                            <td>{{ b.geburtsdatum }}</td>
+                            <td>{{ b.geschlecht }}</td>
                             <td>
                                 <!-- Pfad detailsKunde/:id, in routes.ts -->
                                 <!-- modaler Dialog als Alternative: -->
@@ -130,7 +111,7 @@
                     <ng-template ngPluralCase="other">
                         <fa-icon [icon]="faInfoCircle"></fa-icon>
                         <span class="ml-1">
-                            Es gibt {{ kunden.length }} B&uuml;cher
+                            Es gibt {{ kunden.length }} Kunden
                         </span>
                     </ng-template>
                 </div>
