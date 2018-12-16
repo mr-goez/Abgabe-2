@@ -26,7 +26,7 @@ import {
     HttpParams,
 } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import * as moment from 'moment'
+// import * as moment from 'moment'
 // https://github.com/ReactiveX/rxjs/blob/master/src/internal/Subject.ts
 // https://github.com/ReactiveX/rxjs/blob/master/src/internal/Observable.ts
 import { Subject } from 'rxjs'
@@ -36,7 +36,7 @@ import { BASE_URI, KUNDEN_PATH, log } from '../../shared'
 // Aus SharedModule als Singleton exportiert
 import { DiagrammService } from '../../shared/diagramm.service'
 
-import { Kunde, KundeForm, KundeServer } from './kunde'
+import { Kunde, KundeServer, KundeShared } from './kunde'
 
 // Methoden der Klasse HttpClient
 //  * get(url, options) – HTTP GET request
@@ -124,7 +124,7 @@ export class KundeService {
      * @param suchkriterien Die Suchkriterien
      */
     @log
-    find(suchkriterien: KundeForm) {
+    find(suchkriterien: KundeShared) {
         const params = this.suchkriterienToHttpParams(suchkriterien)
         const uri = this.baseUriKunden
         console.log(`KundeService.find(): uri=${uri}`)
@@ -254,7 +254,7 @@ export class KundeService {
         errorFn: (status: number, errors: { [s: string]: any }) => void,
     ) {
         // Alternative:date-fns
-        neuesKunde.datum = moment(new Date())
+        // neuesKunde.datum = moment(new Date())
 
         const errorFnPost = (err: HttpErrorResponse) => {
             if (err.error instanceof Error) {
@@ -297,55 +297,55 @@ export class KundeService {
             .subscribe(location => successFn(location), errorFnPost)
     }
 
-    /**
-     * Ein vorhandenes Kunde aktualisieren
-     * @param kunde Das JSON-Objekt mit den aktualisierten Kundedaten
-     * @param successFn Die Callback-Function fuer den Erfolgsfall
-     * @param errorFn Die Callback-Function fuer den Fehlerfall
-     */
-    @log
-    update(
-        kunde: Kunde,
-        successFn: () => void,
-        errorFn: (
-            status: number,
-            errors: { [s: string]: any } | undefined,
-        ) => void,
-    ) {
-        const { version } = kunde
-        if (version === undefined) {
-            console.error(`Keine Versionsnummer fuer das Kunde ${kunde._id}`)
-            return
-        }
-        const errorFnPut = (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-                console.error(
-                    'Client-seitiger oder Netzwerkfehler',
-                    err.error.message,
-                )
-            } else {
-                if (errorFn !== undefined) {
-                    errorFn(err.status, err.error)
-                } else {
-                    console.error('errorFnPut', err)
-                }
-            }
-        }
+    // /**
+    //  * Ein vorhandenes Kunde aktualisieren
+    //  * @param kunde Das JSON-Objekt mit den aktualisierten Kundedaten
+    //  * @param successFn Die Callback-Function fuer den Erfolgsfall
+    //  * @param errorFn Die Callback-Function fuer den Fehlerfall
+    //  */
+    // @log
+    // update(
+    //     kunde: Kunde,
+    //     successFn: () => void,
+    //     errorFn: (
+    //         status: number,
+    //         errors: { [s: string]: any } | undefined,
+    //     ) => void,
+    // ) {
+    //     const { version } = kunde
+    //     if (version === undefined) {
+    //         console.error(`Keine Versionsnummer fuer das Kunde ${kunde._id}`)
+    //         return
+    //     }
+    //     const errorFnPut = (err: HttpErrorResponse) => {
+    //         if (err.error instanceof Error) {
+    //             console.error(
+    //                 'Client-seitiger oder Netzwerkfehler',
+    //                 err.error.message,
+    //             )
+    //         } else {
+    //             if (errorFn !== undefined) {
+    //                 errorFn(err.status, err.error)
+    //             } else {
+    //                 console.error('errorFnPut', err)
+    //             }
+    //         }
+    //     }
 
-        const uri = `${this.baseUriKunden}/${kunde._id}`
-        this.headers = this.headers.append('If-Match', version.toString())
-        console.log('headers=', this.headers)
-        this.httpClient
-            .put(uri, kunde, { headers: this.headers })
-            .subscribe(successFn, errorFnPut)
-    }
+    //     const uri = `${this.baseUriKunden}/${kunde._id}`
+    //     this.headers = this.headers.append('If-Match', version.toString())
+    //     console.log('headers=', this.headers)
+    //     this.httpClient
+    //         .put(uri, kunde, { headers: this.headers })
+    //         .subscribe(successFn, errorFnPut)
+    // }
 
-    /**
-     * Ein Kunde l&ouml;schen
-     * @param kunde Das JSON-Objekt mit dem zu loeschenden Kunde
-     * @param successFn Die Callback-Function fuer den Erfolgsfall
-     * @param errorFn Die Callback-Function fuer den Fehlerfall
-     */
+    // /**
+    //  * Ein Kunde l&ouml;schen
+    //  * @param kunde Das JSON-Objekt mit dem zu loeschenden Kunde
+    //  * @param successFn Die Callback-Function fuer den Erfolgsfall
+    //  * @param errorFn Die Callback-Function fuer den Fehlerfall
+    //  */
     @log
     remove(
         kunde: Kunde,
@@ -372,160 +372,160 @@ export class KundeService {
         this.httpClient.delete(uri).subscribe(successFn, errorFnDelete)
     }
 
-    // http://www.sitepoint.com/15-best-javascript-charting-libraries
-    // http://thenextweb.com/dd/2015/06/12/20-best-javascript-chart-libraries
-    // http://mikemcdearmon.com/portfolio/techposts/charting-libraries-using-d3
+    // // http://www.sitepoint.com/15-best-javascript-charting-libraries
+    // // http://thenextweb.com/dd/2015/06/12/20-best-javascript-chart-libraries
+    // // http://mikemcdearmon.com/portfolio/techposts/charting-libraries-using-d3
 
-    // D3 (= Data Driven Documents) https://d3js.org ist das fuehrende Produkt
-    // fuer Datenvisualisierung:
-    //  initiale Version durch die Dissertation von Mike Bostock
-    //  gesponsort von der New York Times, seinem heutigen Arbeitgeber
-    //  basiert auf SVG = scalable vector graphics: Punkte, Linien, Kurven, ...
-    //  ca 250.000 Downloads/Monat bei https://www.npmjs.com
-    //  https://github.com/mbostock/d3 mit ueber 100 Contributors
+    // // D3 (= Data Driven Documents) https://d3js.org ist das fuehrende Produkt
+    // // fuer Datenvisualisierung:
+    // //  initiale Version durch die Dissertation von Mike Bostock
+    // //  gesponsort von der New York Times, seinem heutigen Arbeitgeber
+    // //  basiert auf SVG = scalable vector graphics: Punkte, Linien, Kurven, ...
+    // //  ca 250.000 Downloads/Monat bei https://www.npmjs.com
+    // //  https://github.com/mbostock/d3 mit ueber 100 Contributors
 
-    // Weitere Alternativen:
-    // Google Charts: https://google-developers.appspot.com/chart
-    // Chartist.js:   http://gionkunz.github.io/chartist-js
-    // n3-chart:      http://n3-charts.github.io/line-chart
+    // // Weitere Alternativen:
+    // // Google Charts: https://google-developers.appspot.com/chart
+    // // Chartist.js:   http://gionkunz.github.io/chartist-js
+    // // n3-chart:      http://n3-charts.github.io/line-chart
 
-    // Chart.js ist deutlich einfacher zu benutzen als D3
-    //  basiert auf <canvas>
-    //  ca 25.000 Downloads/Monat bei https://www.npmjs.com
-    //  https://github.com/nnnick/Chart.js mit ueber 60 Contributors
+    // // Chart.js ist deutlich einfacher zu benutzen als D3
+    // //  basiert auf <canvas>
+    // //  ca 25.000 Downloads/Monat bei https://www.npmjs.com
+    // //  https://github.com/nnnick/Chart.js mit ueber 60 Contributors
 
-    /**
-     * Ein Balkendiagramm erzeugen und bei einem Tag <code>canvas</code>
-     * einf&uuml;gen.
-     * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
-     */
-    @log
-    createBarChart(chartElement: HTMLCanvasElement) {
-        const uri = this.baseUriKunden
-        this.httpClient
-            .get<Array<KundeServer>>(uri)
-            .pipe(
-                // ID aus Self-Link
-                map(kunden => kunden.map(kunde => this.setKundeId(kunde))),
-                map(kunden => {
-                    const kundenGueltig = kunden.filter(
-                        b => b._id !== null && b.rating !== undefined,
-                    )
-                    const labels = kundenGueltig.map(b => b._id)
-                    console.log(
-                        'KundeService.createBarChart(): labels: ',
-                        labels,
-                    )
+    // /**
+    //  * Ein Balkendiagramm erzeugen und bei einem Tag <code>canvas</code>
+    //  * einf&uuml;gen.
+    //  * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
+    //  */
+    // @log
+    // createBarChart(chartElement: HTMLCanvasElement) {
+    //     const uri = this.baseUriKunden
+    //     this.httpClient
+    //         .get<Array<KundeServer>>(uri)
+    //         .pipe(
+    //             // ID aus Self-Link
+    //             map(kunden => kunden.map(kunde => this.setKundeId(kunde))),
+    //             map(kunden => {
+    //                 const kundenGueltig = kunden.filter(
+    //                     b => b._id !== null && b.rating !== undefined,
+    //                 )
+    //                 const labels = kundenGueltig.map(b => b._id)
+    //                 console.log(
+    //                     'KundeService.createBarChart(): labels: ',
+    //                     labels,
+    //                 )
 
-                    const data = kundenGueltig.map(b => b.rating)
-                    const datasets = [{ label: 'Bewertung', data }]
+    //                 const data = kundenGueltig.map(b => b.rating)
+    //                 const datasets = [{ label: 'Bewertung', data }]
 
-                    return {
-                        type: 'bar',
-                        data: { labels, datasets },
-                    }
-                }),
-            )
-            .subscribe(config =>
-                this.diagrammService.createChart(chartElement, config),
-            )
-    }
+    //                 return {
+    //                     type: 'bar',
+    //                     data: { labels, datasets },
+    //                 }
+    //             }),
+    //         )
+    //         .subscribe(config =>
+    //             this.diagrammService.createChart(chartElement, config),
+    //         )
+    // }
 
-    /**
-     * Ein Liniendiagramm erzeugen und bei einem Tag <code>canvas</code>
-     * einf&uuml;gen.
-     * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
-     */
-    @log
-    createLinearChart(chartElement: HTMLCanvasElement) {
-        const uri = this.baseUriKunden
+    // /**
+    //  * Ein Liniendiagramm erzeugen und bei einem Tag <code>canvas</code>
+    //  * einf&uuml;gen.
+    //  * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
+    //  */
+    // @log
+    // createLinearChart(chartElement: HTMLCanvasElement) {
+    //     const uri = this.baseUriKunden
 
-        this.httpClient
-            .get<Array<KundeServer>>(uri)
-            .pipe(
-                // ID aus Self-Link
-                map(kunden => kunden.map(b => this.setKundeId(b))),
-                map(kunden => {
-                    const kundenGueltig = kunden.filter(
-                        b => b._id !== null && b.rating !== undefined,
-                    )
-                    const labels = kundenGueltig.map(b => b._id)
-                    console.log(
-                        'KundeService.createLinearChart(): labels: ',
-                        labels,
-                    )
+    //     this.httpClient
+    //         .get<Array<KundeServer>>(uri)
+    //         .pipe(
+    //             // ID aus Self-Link
+    //             map(kunden => kunden.map(b => this.setKundeId(b))),
+    //             map(kunden => {
+    //                 const kundenGueltig = kunden.filter(
+    //                     b => b._id !== null && b.rating !== undefined,
+    //                 )
+    //                 const labels = kundenGueltig.map(b => b._id)
+    //                 console.log(
+    //                     'KundeService.createLinearChart(): labels: ',
+    //                     labels,
+    //                 )
 
-                    const data = kundenGueltig.map(b => b.rating)
-                    const datasets = [{ label: 'Bewertung', data }]
+    //                 const data = kundenGueltig.map(b => b.rating)
+    //                 const datasets = [{ label: 'Bewertung', data }]
 
-                    return {
-                        type: 'line',
-                        data: { labels, datasets },
-                    }
-                }),
-            )
-            .subscribe(config =>
-                this.diagrammService.createChart(chartElement, config),
-            )
-    }
+    //                 return {
+    //                     type: 'line',
+    //                     data: { labels, datasets },
+    //                 }
+    //             }),
+    //         )
+    //         .subscribe(config =>
+    //             this.diagrammService.createChart(chartElement, config),
+    //         )
+    // }
 
-    /**
-     * Ein Tortendiagramm erzeugen und bei einem Tag <code>canvas</code>
-     * einf&uuml;gen.
-     * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
-     */
-    @log
-    createPieChart(chartElement: HTMLCanvasElement) {
-        const uri = this.baseUriKunden
+    // /**
+    //  * Ein Tortendiagramm erzeugen und bei einem Tag <code>canvas</code>
+    //  * einf&uuml;gen.
+    //  * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
+    //  */
+    // @log
+    // createPieChart(chartElement: HTMLCanvasElement) {
+    //     const uri = this.baseUriKunden
 
-        this.httpClient
-            .get<Array<KundeServer>>(uri)
-            .pipe(
-                // ID aus Self-Link
-                map(kunden => kunden.map(kunde => this.setKundeId(kunde))),
-                map(kunden => {
-                    const kundenGueltig = kunden.filter(
-                        b => b._id !== null && b.rating !== undefined,
-                    )
-                    const labels = kundenGueltig.map(b => b._id)
-                    console.log(
-                        'KundeService.createPieChart(): labels: ',
-                        labels,
-                    )
-                    const ratings = kundenGueltig.map(b => b.rating)
+    //     this.httpClient
+    //         .get<Array<KundeServer>>(uri)
+    //         .pipe(
+    //             // ID aus Self-Link
+    //             map(kunden => kunden.map(kunde => this.setKundeId(kunde))),
+    //             map(kunden => {
+    //                 const kundenGueltig = kunden.filter(
+    //                     b => b._id !== null && b.rating !== undefined,
+    //                 )
+    //                 const labels = kundenGueltig.map(b => b._id)
+    //                 console.log(
+    //                     'KundeService.createPieChart(): labels: ',
+    //                     labels,
+    //                 )
+    //                 const ratings = kundenGueltig.map(b => b.rating)
 
-                    const anzahl = ratings.length
-                    const backgroundColor = new Array<string>(anzahl)
-                    const hoverBackgroundColor = new Array<string>(anzahl)
-                    Array(anzahl)
-                        .fill(true)
-                        .forEach((_, i) => {
-                            backgroundColor[
-                                i
-                            ] = this.diagrammService.getBackgroundColor(i)
-                            hoverBackgroundColor[
-                                i
-                            ] = this.diagrammService.getHoverBackgroundColor(i)
-                        })
+    //                 const anzahl = ratings.length
+    //                 const backgroundColor = new Array<string>(anzahl)
+    //                 const hoverBackgroundColor = new Array<string>(anzahl)
+    //                 Array(anzahl)
+    //                     .fill(true)
+    //                     .forEach((_, i) => {
+    //                         backgroundColor[
+    //                             i
+    //                         ] = this.diagrammService.getBackgroundColor(i)
+    //                         hoverBackgroundColor[
+    //                             i
+    //                         ] = this.diagrammService.getHoverBackgroundColor(i)
+    //                     })
 
-                    const data: any = {
-                        labels,
-                        datasets: [
-                            {
-                                data: ratings,
-                                backgroundColor,
-                                hoverBackgroundColor,
-                            },
-                        ],
-                    }
+    //                 const data: any = {
+    //                     labels,
+    //                     datasets: [
+    //                         {
+    //                             data: ratings,
+    //                             backgroundColor,
+    //                             hoverBackgroundColor,
+    //                         },
+    //                     ],
+    //                 }
 
-                    return { type: 'pie', data }
-                }),
-            )
-            .subscribe(config =>
-                this.diagrammService.createChart(chartElement, config),
-            )
-    }
+    //                 return { type: 'pie', data }
+    //             }),
+    //         )
+    //         .subscribe(config =>
+    //             this.diagrammService.createChart(chartElement, config),
+    //         )
+    // }
 
     toString() {
         return `KundeService: {kunde: ${JSON.stringify(this._kunde, null, 2)}}`
@@ -537,7 +537,7 @@ export class KundeService {
      * @return Parameter fuer den GET-Request
      */
     @log
-    private suchkriterienToHttpParams(suchkriterien: KundeForm): HttpParams {
+    private suchkriterienToHttpParams(suchkriterien: KundeShared): HttpParams {
         let httpParams = new HttpParams()
 
         if (
@@ -570,15 +570,15 @@ export class KundeService {
         return httpParams
     }
 
-    private setKundeId(kunde: KundeServer) {
-        const selfLink = kunde.links[1].href
-        if (selfLink !== undefined) {
-            const lastSlash = selfLink.lastIndexOf('/')
-            kunde._id = selfLink.substring(lastSlash + 1)
-        }
-        if (kunde._id === undefined) {
-            kunde._id = 'undefined'
-        }
-        return kunde
-    }
+    // private setKundeId(kunde: KundeServer) {
+    //     const selfLink = kunde.links[1].href
+    //     if (selfLink !== undefined) {
+    //         const lastSlash = selfLink.lastIndexOf('/')
+    //         kunde._id = selfLink.substring(lastSlash + 1)
+    //     }
+    //     if (kunde._id === undefined) {
+    //         kunde._id = 'undefined'
+    //     }
+    //     return kunde
+    // }
 }

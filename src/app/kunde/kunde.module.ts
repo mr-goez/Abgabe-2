@@ -21,6 +21,7 @@ import { Title } from '@angular/platform-browser'
 import { ROUTES } from '../routes'
 import { SharedModule } from '../shared/shared.module'
 
+import { CreateKundeComponent } from './create-kunde/create-kunde.component'
 import { DetailsKundeComponent } from './details-kunde/details-kunde.component'
 import { DetailsSchlagwoerterComponent } from './details-kunde/details-schlagwoerter.component'
 import { DetailsStammdatenComponent } from './details-kunde/details-stammdaten.component'
@@ -39,6 +40,7 @@ const komponentenIntern: Array<Type<any>> = [
     SucheKundenComponent,
     SuchergebnisComponent,
     SuchformularComponent,
+    CreateKundeComponent,
 ]
 
 // Ein Modul enthaelt logisch zusammengehoerige Funktionalitaet.
