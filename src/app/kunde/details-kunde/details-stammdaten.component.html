@@ -52,8 +52,8 @@
             <td><label>Geschlecht</label></td>
             <td>
                 <span [ngSwitch]="kunde.geschlecht">
-                    <span *ngSwitchCase="'MÄNNLICH'">maennlich</span>
-                    <span *ngSwitchCase="'WEIBLICH'">weiblich</span>
+                    <span *ngSwitchCase="'M'">maennlich</span>
+                    <span *ngSwitchCase="'W'">weiblich</span>
                     <span *ngSwitchDefault>different</span>
                 </span>
             </td>
@@ -62,9 +62,9 @@
             <td><label>Familienstand</label></td>
             <td>
                     <span [ngSwitch]="kunde.familienstand">
-                        <span *ngSwitchCase="'VERHEIRATET'">Verheiratet</span>
-                        <span *ngSwitchCase="'GESCHIEDEN'">Geschieden</span>
-                        <span *ngSwitchDefault>different</span>
+                        <span *ngSwitchCase="'V'">verheiratet</span>
+                        <span *ngSwitchCase="'G'">geschieden</span>
+                        <span *ngSwitchDefault>ledig</span>
                     </span>
             </td>
         </tr>

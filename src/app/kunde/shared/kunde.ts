@@ -23,14 +23,14 @@ export interface Umsatz {
 // }
 
 export enum Geschlecht {
-    MÄNNLICH = 'MAENNLICH',
-    WEIBLICH = 'WEIBLICH',
+    M = 'MAENNLICH',
+    W = 'WEIBLICH',
 }
 
 export enum Familienstand {
-    VERHEIRATET = 'VERHEITATET',
+    VERHEITATET = 'VERHEITATET',
     GESCHIEDEN = 'GESCHIEDEN',
-    VERWITWET = 'VERWITTWET',
+    VERWITTWET = 'VERWITTWET',
 }
 
 // export type adresse = 'plz' & 'ort'
