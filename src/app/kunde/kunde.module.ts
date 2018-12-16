@@ -23,8 +23,9 @@ import { SharedModule } from '../shared/shared.module'
 
 import { CreateKundeComponent } from './create-kunde/create-kunde.component'
 import { DetailsKundeComponent } from './details-kunde/details-kunde.component'
-import { DetailsSchlagwoerterComponent } from './details-kunde/details-schlagwoerter.component'
 import { DetailsStammdatenComponent } from './details-kunde/details-stammdaten.component'
+
+import { DetailsInteressenComponent } from './details-kunde/details-interessen.component'
 import { SucheKundenComponent } from './suche-kunden/suche-kunden.component'
 import { SuchergebnisComponent } from './suche-kunden/suchergebnis.component'
 import { SuchformularComponent } from './suche-kunden/suchformular.component'
@@ -35,7 +36,7 @@ const komponentenExport: Array<Type<any>> = [
 ]
 
 const komponentenIntern: Array<Type<any>> = [
-    DetailsSchlagwoerterComponent,
+    DetailsInteressenComponent,
     DetailsStammdatenComponent,
     SucheKundenComponent,
     SuchergebnisComponent,

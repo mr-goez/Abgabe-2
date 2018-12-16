@@ -34,7 +34,7 @@ import { filter, map } from 'rxjs/operators'
 
 import { BASE_URI, KUNDEN_PATH, log } from '../../shared'
 // Aus SharedModule als Singleton exportiert
-import { DiagrammService } from '../../shared/diagramm.service'
+// import { DiagrammService } from '../../shared/diagramm.service'
 
 import { Kunde, KundeServer, KundeShared } from './kunde'
 
@@ -540,7 +540,10 @@ export class KundeService {
     private suchkriterienToHttpParams(suchkriterien: KundeShared): HttpParams {
         let httpParams = new HttpParams()
 
-        if (suchkriterien.nachname !== undefined && suchkriterien.nachname !== '') {
+        if (
+            suchkriterien.nachname !== undefined &&
+            suchkriterien.nachname !== ''
+        ) {
             httpParams = httpParams.set('nachname', suchkriterien.nachname)
         }
         if (suchkriterien.email !== undefined) {
