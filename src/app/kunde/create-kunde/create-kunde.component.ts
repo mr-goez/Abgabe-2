@@ -87,6 +87,9 @@ export class CreateKundeComponent implements OnInit {
         undefined,
         Validators.required,
     )
+    readonly lesen: FormControl = new FormControl(false)
+    readonly reisen: FormControl = new FormControl(false)
+    readonly sport: FormControl = new FormControl(false)
 
     showWarning = false
     fertig = false
