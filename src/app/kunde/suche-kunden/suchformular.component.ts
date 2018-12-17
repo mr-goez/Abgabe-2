@@ -20,7 +20,7 @@ import { faInfoCircle, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { Subject } from 'rxjs'
 
 import { fadeIn, log } from '../../shared'
-// import { KundeArt, Verlag } from '../shared/kunde'
+import { Geschlecht } from '../shared/kunde'
 import { KundeService } from '../shared/kunde.service'
 
 /**
@@ -34,9 +34,10 @@ import { KundeService } from '../shared/kunde.service'
 export class SuchformularComponent {
     nachname: string | undefined
     email: string | undefined
-    // art: KundeArt | undefined
-    // javascript = false
-    // typescript = false
+    geschlecht: Geschlecht | undefined
+    lesen = false
+    reisen = false
+    sport = false
 
     // Event Binding: <hs-suchformular (waiting)="...">
     // Observables = Event-Streaming mit Promises
@@ -63,7 +64,10 @@ export class SuchformularComponent {
         const suchkriterien: any = {
             nachname: this.nachname,
             email: this.email,
-            // Or More
+            geschlecht: this.geschlecht,
+            sport: this.sport,
+            lesen: this.lesen,
+            reisen: this.reisen,
         }
         console.log('suchkriterien=', suchkriterien)
 
