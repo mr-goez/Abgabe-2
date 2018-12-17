@@ -16,11 +16,11 @@ export interface Umsatz {
     waehrung?: string
 }
 
-// export enum Interesse {
-//     SPORT = 'SPORT',
-//     LESEN = 'LESEN',
-//     REISEN = 'REISEN',
-// }
+export enum Interesse {
+    SPORT = 'S',
+    LESEN = 'L',
+    REISEN = 'R',
+}
 
 export enum Geschlecht {
     MÄNNLICH = 'M',
@@ -83,7 +83,7 @@ interface SelfLink {
  * </ul>
  */
 export interface KundeServer extends KundeShared {
-    // schlagwoerter?: Array<string>
+    interessen?: Array<string>
     links?: any
     _links?: SelfLink
 }
@@ -136,7 +136,10 @@ export class Kunde {
         this.homepage = homepage
         this.geschlecht = geschlecht
         this.familienstand = familienstand
-        this.interessen = interessen
+        this.interessen =
+                   interessen === undefined
+        ? []
+        : (this.interessen = interessen)
         this.adresse = adresse
         this.user = user
     }
@@ -217,7 +220,7 @@ export class Kunde {
             kundeForm.homepage,
             kundeForm.geschlecht,
             kundeForm.familienstand,
-            kundeForm.interessen,
+            interessen,
             kundeForm.adresse,
             kundeForm.version,
             kundeForm.user,
@@ -315,18 +318,18 @@ export class Kunde {
      * @param interesse das zu &uuml;berpr&uuml;fende Schlagwort
      * @return true, falls es das Schlagwort gibt. Sonst false.
      */
-    // hasSchlagwort(schlagwort: string) {
-    //     if (this.schlagwoerter === undefined) {
-    //         return false
-    //     }
-    //     return this.schlagwoerter.includes(schlagwort)
-    // }
+    hasInteresse(interesse: string) {
+        if (this.interessen === undefined) {
+            return false
+        }
+        return this.interessen.includes(interesse)
+    }
 
     /**
      * Aktualisierung der Schlagw&ouml;rter des Kunde-Objekts.
-     * @param lesen ist das Schlagwort JAVASCRIPT gesetzt
-     * @param schreiben ist das Schlagwort TYPESCRIPT gesetzt
-     * @param sport ist das Schlagwort TYPESCRIPT gesetzt
+     * @param lesen ist das Schlagwort LESEN gesetzt
+     * @param reisen ist das Schlagwort REISEN gesetzt
+     * @param sport ist das Schlagwort SPORT gesetzt
      */
     // updateSchlagwoerter(javascript: boolean, typescript: boolean) {
     //     this.resetSchlagwoerter()

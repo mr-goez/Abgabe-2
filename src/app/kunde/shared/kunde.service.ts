@@ -36,7 +36,7 @@ import { BASE_URI, KUNDEN_PATH, log } from '../../shared'
 // Aus SharedModule als Singleton exportiert
 // import { DiagrammService } from '../../shared/diagramm.service'
 
-import { Kunde, KundeServer, KundeShared } from './kunde'
+import { Kunde, KundeForm, KundeServer, KundeShared } from './kunde'
 
 // Methoden der Klasse HttpClient
 //  * get(url, options) – HTTP GET request
@@ -537,7 +537,7 @@ export class KundeService {
      * @return Parameter fuer den GET-Request
      */
     @log
-    private suchkriterienToHttpParams(suchkriterien: KundeShared): HttpParams {
+    private suchkriterienToHttpParams(suchkriterien: KundeForm): HttpParams {
         let httpParams = new HttpParams()
 
         if (
@@ -550,19 +550,19 @@ export class KundeService {
             const value = suchkriterien.email
             httpParams = httpParams.set('email', value)
         }
-        if (
-            suchkriterien.geschlecht !== undefined &&
-            suchkriterien.geschlecht.length !== 0
-        ) {
+        if (suchkriterien.geschlecht !== undefined) {
             const value = suchkriterien.geschlecht
             httpParams = httpParams.set('geschlecht', value)
         }
-        // if (suchkriterien.javascript === true) {
-        //     httpParams = httpParams.set('javascript', 'true')
-        // }
-        // if (suchkriterien.typescript === true) {
-        //     httpParams = httpParams.set('typescript', 'true')
-        // }
+        if (suchkriterien.reisen === true) {
+            httpParams = httpParams.set('interessen', 'R')
+        }
+        if (suchkriterien.sport === true) {
+            httpParams = httpParams.set('S', 'true')
+        }
+        if (suchkriterien.lesen === true) {
+            httpParams = httpParams.set('L', 'true')
+        }
         return httpParams
     }
 

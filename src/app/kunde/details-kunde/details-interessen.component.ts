@@ -30,9 +30,9 @@ import { log } from '../../shared'
                 <div class="checkbox">
                     <input type="checkbox" checked disabled class="checkbox" />
                     <label [ngSwitch]="interesse">
-                        <span *ngSwitchCase="'LESEN'">Lesen</span>
-                        <span *ngSwitchCase="'SCHREIBEN'">Schreiben</span>
-                        <span *ngSwitchCase="'SPORT'">Sport</span>
+                        <span *ngSwitchCase="'L'">Lesen</span>
+                        <span *ngSwitchCase="'R'">Reisen</span>
+                        <span *ngSwitchCase="'S'">Sport</span>
                     </label>
                     <div></div>
                 </div>

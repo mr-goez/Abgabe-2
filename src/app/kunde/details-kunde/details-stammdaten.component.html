@@ -35,8 +35,8 @@
             <td><label>Newsletter</label></td>
             <td>
                 <span [ngSwitch]="kunde.newsletter">
-                    <span *ngSwitchCase="'true'">ja</span>
-                    <span *ngSwitchCase="'false'">nein</span>
+                    <span *ngSwitchCase="true">ja</span>
+                    <span *ngSwitchCase="false">nein</span>
                 </span>
             </td>
         </tr>
@@ -47,7 +47,7 @@
         <tr>
                 <td><label>Umsatz</label></td>
                 <!-- TODO 2 Nachkommastellen. Pipe "| number: '.2'" -->
-                <td>{{ kunde.umsatz.betrag }}</td>
+                <td>{{ kunde.umsatz.betrag | currency: 'EUR':'symbol' }}</td>
         </tr>
         <tr>
                 <td><label>Homepage</label></td>
