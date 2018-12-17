@@ -72,29 +72,9 @@
                             <td>{{ i + 1 }}</td>
                             <td>{{ b._id }}</td>
                             <td>{{ b.nachname }}</td>
-                            <td>
-                                <span [ngSwitch]="b.verlag">
-                                    <span *ngSwitchCase="'IWI_VERLAG'"
-                                        >Iwi Verlag</span
-                                    >
-                                    <span *ngSwitchCase="'HSKA_VERLAG'">
-                                        Hska Verlag
-                                    </span>
-                                    <span *ngSwitchDefault>unbekannt</span>
-                                </span>
-                            </td>
-                            <td>
-                                <span *ngFor="let sw of b.schlagwoerter">
-                                    <span [ngSwitch]="sw">
-                                        <span *ngSwitchCase="'JAVASCRIPT'">
-                                            JavaScript<br />
-                                        </span>
-                                        <span *ngSwitchCase="'TYPESCRIPT'">
-                                            TypeScript
-                                        </span>
-                                    </span>
-                                </span>
-                            </td>
+                            <td>{{ b.email }}</td>
+                            <td>{{ b.geburtsdatum }}</td>
+                            <td>{{ b.geschlecht }}</td>
                             <td>
                                 <!-- Pfad detailsKunde/:id, in routes.ts -->
                                 <!-- modaler Dialog als Alternative: -->
@@ -150,6 +130,7 @@
         <!--
             Ausgabe des JSON-Datensatzes im Webbrowser statt console.log(...)
         -->
-        <!-- <pre>{{kunden | json}}</pre> -->
+      <!--  <pre>{{kunden | json}}</pre> -->
+    
     </ng-template>
 </ng-template>

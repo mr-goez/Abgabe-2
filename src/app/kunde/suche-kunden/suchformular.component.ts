@@ -61,11 +61,9 @@ export class SuchformularComponent {
     @log
     onFind() {
         const suchkriterien: any = {
-            titel: this.nachname,
-            verlag: this.email,
-            // art: this.art,
-            // javascript: this.javascript,
-            // typescript: this.typescript,
+            nachname: this.nachname,
+            email: this.email,
+            // Or More
         }
         console.log('suchkriterien=', suchkriterien)
 

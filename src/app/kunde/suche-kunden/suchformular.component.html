@@ -55,13 +55,13 @@
 
         <form (submit)="onFind()" role="form">
             <div class="form-group row">
-                <label for="titelInput" class="col col-2 form-control-label">
+                <label for="nachnameInput" class="col col-2 form-control-label">
                     Nachname
                 </label>
                 <div class="col col-10">
                     <!-- type="search" funktioniert nicht mit Bootstrap -->
                     <input
-                        id="titelInput"
+                        id="nachnameInput"
                         placeholder="Den Nachnamen oder einen Teil davon eingeben"
                         class="form-control"
                         [(ngModel)]="nachname"
@@ -71,17 +71,18 @@
             </div>
 
             <div class="form-group row">
-                <label class="col col-2 form-control-label">E-Mail</label>
+                <label for="emailInput" class="col col-2 form-control-label">
+                    E-Mail
+                </label>
                 <div class="col col-10">
-                    <select
+                    <!-- type="search" funktioniert nicht mit Bootstrap -->
+                    <input
+                        id="emailInput"
+                        placeholder="Bitte eine E-Mail oder einen Teil davon eingeben"
                         class="form-control"
                         [(ngModel)]="email"
                         name="email"
-                    >
-                        <option value=""></option>
-                        <option value="IWI_VERLAG">Iwi Verlag</option>
-                        <option value="HSKA_VERLAG">Hska Verlag</option>
-                    </select>
+                    />
                 </div>
             </div>
 

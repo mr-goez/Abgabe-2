@@ -20,76 +20,70 @@
 >
     <tbody>
         <tr>
-            <td><label>Titel</label></td>
-            <td>{{ kunde.titel }}</td>
+            <td><label>Nachname</label></td>
+            <td>{{ kunde.nachname }}</td>
         </tr>
         <tr>
-            <td><label>Bewertung</label></td>
+                <td><label>E-Mail</label></td>
+                <td>{{ kunde.email }}</td>
+        </tr>
+        <tr>
+                <td><label>Kategorie</label></td>
+                <td>{{ kunde.kategorie }}</td>
+        </tr>
+        <tr>
+            <td><label>Newsletter</label></td>
             <td>
-                <span *ngFor="let r of kunde.ratingArray">
-                    <fa-icon
-                        [icon]="faStar"
-                        style="color: yellow;"
-                        *ngIf="r === true"
-                    ></fa-icon>
+                <span [ngSwitch]="kunde.newsletter">
+                    <span *ngSwitchCase="'true'">ja</span>
+                    <span *ngSwitchCase="'false'">nein</span>
                 </span>
             </td>
         </tr>
         <tr>
-            <td><label>Art</label></td>
+                <td><label>Geburtsdatum</label></td>
+                <td>{{ kunde.geburtsdatum }}</td>
+        </tr>
+        <tr>
+                <td><label>Umsatz</label></td>
+                <!-- TODO 2 Nachkommastellen. Pipe "| number: '.2'" -->
+                <td>{{ kunde.umsatz.betrag }}</td>
+        </tr>
+        <tr>
+                <td><label>Homepage</label></td>
+                <td>{{ kunde.homepage }}</td>
+        </tr>
+        <tr>       
+            <td><label>Geschlecht</label></td>
             <td>
-                <span [ngSwitch]="kunde.art">
-                    <span *ngSwitchCase="'DRUCKAUSGABE'">Druckausgabe</span>
-                    <span *ngSwitchCase="'KINDLE'">Kindle</span>
-                    <span *ngSwitchDefault>unbekannt</span>
+                <span [ngSwitch]="kunde.geschlecht">
+                    <span *ngSwitchCase="'M'">maennlich</span>
+                    <span *ngSwitchCase="'W'">weiblich</span>
+                    <span *ngSwitchDefault>different</span>
                 </span>
             </td>
         </tr>
         <tr>
-            <td><label>Verlag</label></td>
+            <td><label>Familienstand</label></td>
             <td>
-                <span [ngSwitch]="kunde.verlag">
-                    <span *ngSwitchCase="'IWI_VERLAG'">Iwi Verlag</span>
-                    <span *ngSwitchCase="'HSKA_VERLAG'">Hska Verlag</span>
-                    <span *ngSwitchDefault>unbekannt</span>
-                </span>
+                    <span [ngSwitch]="kunde.familienstand">
+                        <span *ngSwitchCase="'VH'">verheiratet</span>
+                        <span *ngSwitchCase="'G'">geschieden</span>
+                        <span *ngSwitchCase="'VW'">verwitwet</span>
+                        <span *ngSwitchCase="'L'">ledig</span>
+                    </span>
             </td>
         </tr>
         <tr>
-            <td><label>Datum</label></td>
-            <td>
-                {{ kunde.datumFormatted }}<br />
-                {{ kunde.datumFromNow }}
-            </td>
+                <td><label>Adresse:</label></td>
         </tr>
         <tr>
-            <td><label>Preis</label></td>
-            <!-- TODO 2 Nachkommastellen. Pipe "| number: '.2'" -->
-            <td>{{ kunde.preis | currency: 'EUR':'symbol' }}</td>
+                <td><label>Ort</label></td>
+                <td>{{ kunde.adresse.ort }}</td>
         </tr>
         <tr>
-            <td><label>Rabatt</label></td>
-            <!-- {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits} -->
-            <!-- default: 1.0-3 -->
-            <!-- siehe number_pipe.ts -->
-            <td>{{ kunde.rabatt | percent: '.2' }}</td>
-        </tr>
-        <tr>
-            <td><label>ISBN</label></td>
-            <td>{{ kunde.isbn }}</td>
-        </tr>
-        <tr>
-            <td><label>Lieferbar?</label></td>
-            <td>
-                <div class="checkbox">
-                    <input
-                        type="checkbox"
-                        checked="{{ kunde.lieferbar }}"
-                        disabled
-                        class="checkbox"
-                    />
-                </div>
-            </td>
+                <td><label>PLZ</label></td>
+                <td>{{ kunde.adresse.plz }}</td>
         </tr>
     </tbody>
 </table>

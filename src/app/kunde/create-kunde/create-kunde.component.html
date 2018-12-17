@@ -1,0 +1,496 @@
+<!--
+    Copyright (C) 2015 - present Juergen Zimmermann, Hochschule Karlsruhe
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<div class="card">
+    <div class="card-header">
+        <span class="ml-1 font-weight-bold">Neuer Kunde</span>
+    </div>
+
+    <div class="card-body">
+        <!--
+            Template-Syntax:
+               [formGroup]="form"  fuer Input = Property Binding
+                                   d.h. formGroup fuer Attr. form
+               (submit)="save()"  fuer Output = Event Binding
+                                  d.h. Ereignis submit an save() anbinden
+                                  oder on-submit="save"
+               Definition von Attributnamen gemaess HTML: Attribute names
+               must consist of one or more characters other than the
+               space characters, U+0000 NULL, """, "'", ">", "/", "=",
+               the control characters, and any characters that are not
+               defined by Unicode.
+               https://github.com/angular/angular/issues/6786
+        -->
+        <!-- dynamisches Formular durch formGroup -->
+        <form [formGroup]="form" role="form">
+            <div class="form-group row has-warning" *ngIf="showWarning">
+                <div class="form-control-feedback">
+                    <span class="alert alert-warning">
+                        <fa-icon
+                            [icon]="faExclamationTriangle"
+                            [size]="faExclamationTriangleSize"
+                        ></fa-icon>
+                        <strong class="text-help ml-1">
+                            Wenn Sie die Seite jetzt verlassen, verlieren Sie
+                            Ihre eingegebenen Daten.
+                        </strong>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="nachnamelInput" class="col col-3 form-control-label">
+                    Nachname *
+                </label>
+                <div class="col col-9">
+                    <input
+                        id="nachnameInput"
+                        placeholder="Nachname"
+                        class="form-control"
+                        autofocus
+                        formControlName="nachname"
+                        [class.border-danger]="nachnameinvalid && nachname.touched"
+                    />
+                    <div
+                        *ngIf="nachname.invalid && nachname.touched"
+                        class="alert alert-danger"
+                    >
+                        <div
+                            *ngIf="
+                            nachname.errors !== null && nachname.errors.required
+                            "
+                        >
+                            <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                            <span class="ml-1">
+                                Ein Nachname muss eingegeben werden.
+                            </span>
+                        </div>
+                        <div
+                            *ngIf="
+                            nachname.errors !== null && nachname.errors.minlength
+                            "
+                        >
+                            <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                            <span class="ml-1">
+                                Ein Nachname muss mindestens 2 Zeichen lang
+                                sein.
+                            </span>
+                        </div>
+                        <div
+                            *ngIf="
+                            nachname.errors !== null && nachname.errors.pattern
+                            "
+                        >
+                            <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                            <span class="ml-1">
+                                Ein Nachname muss mit einem Großbuchstaben beginnen
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                    <label for="geburtsdatumInput" class="col col-3 form-control-label">
+                        Geburtsdatum *
+                    </label>
+                    <div class="col col-9">
+                        <input
+                            id="geburtsdatumInput"                            
+                            class="form-control"
+                            type="date"
+                            formControlName="geburtsdatum"
+                            [class.border-danger]="geburtsdatuminvalid && geburtsdatum.touched"
+                        />
+                        <div
+                            *ngIf="geburtsdatum.invalid && geburtsdatum.touched"
+                            class="alert alert-danger"
+                        >
+                            <div
+                                *ngIf="
+                                geburtsdatum.errors !== null && geburtsdatum.errors.required
+                                "
+                            >
+                                <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                                <span class="ml-1">
+                                    Ein Geburtsdatum muss eingegeben werden.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="form-group row">
+                <label class="col col-3 form-control-label">Geschlecht *</label>
+                <div class="col col-9">
+                    <div class="radio">
+                        <input
+                            type="radio"
+                            id="maennlichInput"
+                            formControlName="geschlecht"
+                            name="geschlecht"
+                            value="M"
+                        />
+                        <label class="radio-inline" for="druckausgabeInput">
+                            männlich
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <input
+                            type="radio"
+                            id="weiblichInput"
+                            formControlName="geschlecht"
+                            name="geschlecht"
+                            value="W"
+                        />
+                        <label class="radio-inline" for="kindleInput">
+                            weiblich
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col col-3 form-control-label">Familienstand </label>
+                <div class="col col-9">
+                    <div class="radio">
+                        <input
+                            type="radio"
+                            id="verheiratetInput"
+                            formControlName="familienstand"
+                            name="familienstand"
+                            value="VH"
+                        />
+                        <label class="radio-inline" for="druckausgabeInput">
+                            Verheiratet
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <input
+                            type="radio"
+                            id="geschiedenInput"
+                            formControlName="familienstand"
+                            name="familienstand"
+                            value="G"
+                        />
+                        <label class="radio-inline" for="kindleInput">
+                            Geschieden
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <input
+                            type="radio"
+                            id="verwittwetInput"
+                            formControlName="familienstand"
+                            name="familienstand"
+                            value="VW"
+                        />
+                        <label class="radio-inline" for="druckausgabeInput">
+                                Verwittwet
+                        </label>
+                    </div>
+                    <div class="radio">
+                            <input
+                                type="radio"
+                                id="ledigInput"
+                                formControlName="familienstand"
+                                name="familienstand"
+                                value="L"
+                            />
+                            <label class="radio-inline" for="druckausgabeInput">
+                                    Ledig
+                            </label>
+                        </div>
+                </div>
+            </div>
+    
+
+            <div class="form-group row">
+                <label for="emailInput" class="col col-3 form-control-label">
+                    Email *
+                </label>
+                <div class="col col-9">
+                    <div class="input-group">
+                        <input
+                            id="emailInput"
+                            placeholder="Email, z.B. mustermail@muster.de"
+                            required
+                            class="form-control"
+                            formControlName="email"
+                            [class.border-danger]="
+                                email.invalid && email.touched
+                            "
+                        />                        
+                    </div>
+                    <div
+                        *ngIf="email.invalid && email.touched"
+                        class="alert alert-danger"
+                    >
+                        <div
+                            *ngIf="
+                                email.errors !== null && email.errors.required
+                            "
+                        >
+                            <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                            <span class="ml-1">
+                                Eine Email muss angegeben werden, z.B. mustermail@muster.de
+                            </span>
+                        </div>
+                        <div
+                            *ngIf="
+                            email.errors !== null && email.errors.pattern
+                            "
+                        >
+                            <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                            <span class="ml-1">
+                                Das Format der Email ist falsch
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div formGroupName="umsatz">
+                <label>Umsatz</label>
+                <div class="form-group row col">
+                    <label class="col col-3 form-control-label" for="betragInput">
+                        Betrag
+                    </label>
+                    <div class="col col-9">
+                        <input 
+                        id="betragInput"
+                        placeholder="z.B. 20.00"  
+                        formControlName="betrag" 
+                        class="form-control"
+                        [class.border-danger]="
+                                betrag.invalid && betrag.touched
+                            "
+                        />
+                        <div
+                            *ngIf="betrag.invalid && betrag.touched"
+                            class="alert alert-danger"
+                        >
+                            <div
+                                *ngIf="
+                                betrag.errors !== null && betrag.errors.pattern
+                                "
+                            >
+                                <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                                <span class="ml-1">
+                                    Das Format ist falsch!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="waehrungInput"class="col col-3 form-control-label" >
+                        Währung
+                    </label>
+                    <div class="col col-9">
+                        <input 
+                        id="waehrungInput"
+                        placeholder="z.B. EUR" 
+                        formControlName="waehrung" 
+                        class="form-control"
+                        [class.border-danger]="
+                                    waehrung.invalid && waehrung.touched
+                                "                        
+                        />
+                    </div>     
+                </div>
+            </div>
+
+            <div class="form-group row">
+                    <label
+                        for="interessenInput"
+                        class="col col-3 form-control-label"
+                    >
+                        Interessen
+                    </label>
+                    <div class="col col-9">
+                        <div class="checkbox">
+                            <input
+                                type="checkbox"
+                                id="lesenInput"
+                                formControlName="lesen"
+                            />
+                            <label for="lesenInput">Lesen</label>
+                        </div>
+                        <div class="checkbox">
+                            <input
+                                type="checkbox"
+                                id="reisenInput"
+                                formControlName="reisen"
+                            />
+                            <label for="typescriptInput">Reisen</label>
+                        </div>
+                        <div class="checkbox">
+                                <input
+                                    type="checkbox"
+                                    id="sportInput"
+                                    formControlName="sport"
+                                />
+                                <label for="typescriptInput">Sport</label>
+                            </div>
+                    </div>
+                </div>
+
+            <div class="form-group row">
+                    <label for="kategorieInput" class="col col-3 form-control-label">
+                        Kategorie *
+                    </label>
+                    <div class="col col-9">
+                        <div class="input-group">
+                            <input
+                                id="kategorieInput"
+                                placeholder="Kategorie, 1-9"
+                                required
+                                type="number"
+                                class="form-control"
+                                formControlName="kategorie"
+                                [class.border-danger]="
+                                    kategorie.invalid && kategorie.touched
+                                "
+                            />                          
+                        </div>                        
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label
+                        for="newsletterInput"
+                        class="col col-3 form-control-label"
+                    >
+                        Newsletter?
+                    </label>
+                    <div class="col col-9">
+                        <div class="checkbox">
+                            <input
+                                id="newsletterInput"
+                                type="checkbox"
+                                formControlName="newsletter"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="homepageInput" class="col col-3 form-control-label">
+                        Homepage
+                    </label>
+                    <div class="col col-9">
+                        <div class="input-group">
+                            <input
+                                id="homepageInput"
+                                placeholder="Homepage?"                                    
+                                class="form-control"
+                                formControlName="homepage" 
+                                type="url"
+                                [class.border-danger]="
+                                    kategorie.invalid && kategorie.touched
+                                "                                   
+                            />                          
+                        </div>                        
+                    </div>
+                </div>
+
+                <div formGroupName="adresse">
+                    <label> 
+                        Adresse *
+                    </label>
+                    <div class="form-group row col">
+                        <label class="col col-3 form-control-label" for="plzInput">
+                            PLZ
+                        </label>
+                        <div class="col col-9">
+                            <input 
+                            id="plzInput"
+                            placeholder="z.B. 12345" 
+                            formControlName="plz" 
+                            class="form-control"
+                            [class.border-danger]="
+                                    plz.invalid && plz.touched
+                                "
+                            />
+                        </div>  
+                        <label class="col col-3 form-control-label" for="ortInput">
+                            Ort
+                        </label>
+                        <div class="col col-9">
+                            <input 
+                            id="ortInput" 
+                            placeholder="Ort"
+                            formControlName="ort" 
+                            class="form-control"
+                            [class.border-danger]="
+                                    ort.invalid && ort.touched
+                                "
+                            />
+                        </div>                            
+                    </div>
+                </div>
+
+                <div formGroupName="user">
+                        <label>User *</label>
+                        <div class="form-group row col">
+                            <label class="col col-3 form-control-label" for="usernameInput">
+                                Username
+                            </label>
+                                <div class="col col-9">
+                                    <input 
+                                    id="usernameInput"
+                                    placeholder="z.B. Nachname"  
+                                    formControlName="username" 
+                                    class="form-control"
+                                    />
+                                </div>
+                            <label for="waehrungInput"class="col col-3 form-control-label" >
+                                Passwort
+                            </label>
+                            <div class="col col-9">
+                                <input 
+                                id="passwordInput"                                 
+                                formControlName="password" 
+                                class="form-control" 
+                                type ="password"                       
+                                />
+                            </div>     
+                        </div>
+                    </div>
+
+            <div class="form-group row">
+                <div class="col offset-2">
+                    <!--
+                        Template-Syntax:
+                           (click)="onSave()" fuer Output = Event Binding
+                                              d.h. Ereignis click an onSave() anbinden
+                                              oder on-click="onSave"
+                           [disabled]="..." fuer Input = Property Binding
+                    -->
+                    <button
+                        class="btn btn-primary"
+                        (click)="onSave()"
+                        [disabled]="!form.valid"
+                    >
+                        <fa-icon [icon]="faCheck"></fa-icon>
+                        <span class="ml-1">Jetzt anlegen</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <small>* sind Pflichtfelder</small>
+    </div>
+</div>
