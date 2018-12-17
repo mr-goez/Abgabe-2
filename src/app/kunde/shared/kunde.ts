@@ -31,7 +31,7 @@ export enum Familienstand {
     VERHEIRATET = 'VH',
     GESCHIEDEN = 'G',
     VERWITWET = 'VW',
-    LEDIG= 'L',
+    LEDIG = 'L',
 }
 
 export interface Adresse {

@@ -550,17 +550,13 @@ export class KundeService {
             const value = suchkriterien.email
             httpParams = httpParams.set('email', value)
         }
-        // if (suchkriterien.rating !== undefined) {
-        //     const value = suchkriterien.rating.toString()
-        //     httpParams = httpParams.set('rating', value)
-        // }
-        // if (
-        //     suchkriterien.verlag !== undefined &&
-        //     suchkriterien.verlag.length !== 0
-        // ) {
-        //     const value = suchkriterien.verlag
-        //     httpParams = httpParams.set('verlag', value)
-        // }
+        if (
+            suchkriterien.geschlecht !== undefined &&
+            suchkriterien.geschlecht.length !== 0
+        ) {
+            const value = suchkriterien.geschlecht
+            httpParams = httpParams.set('geschlecht', value)
+        }
         // if (suchkriterien.javascript === true) {
         //     httpParams = httpParams.set('javascript', 'true')
         // }

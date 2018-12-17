@@ -20,7 +20,7 @@
 >
     <tbody>
         <tr>
-            <td><label>Titel</label></td>
+            <td><label>Nachname</label></td>
             <td>{{ kunde.nachname }}</td>
         </tr>
         <tr>
@@ -32,8 +32,13 @@
                 <td>{{ kunde.kategorie }}</td>
         </tr>
         <tr>
-                <td><label>Newsletter</label></td>
-                <td>{{ kunde.newsletter }}</td>
+            <td><label>Newsletter</label></td>
+            <td>
+                <span [ngSwitch]="kunde.newsletter">
+                    <span *ngSwitchCase="'true'">ja</span>
+                    <span *ngSwitchCase="'false'">nein</span>
+                </span>
+            </td>
         </tr>
         <tr>
                 <td><label>Geburtsdatum</label></td>
@@ -62,14 +67,15 @@
             <td><label>Familienstand</label></td>
             <td>
                     <span [ngSwitch]="kunde.familienstand">
-                        <span *ngSwitchCase="'V'">verheiratet</span>
+                        <span *ngSwitchCase="'VH'">verheiratet</span>
                         <span *ngSwitchCase="'G'">geschieden</span>
-                        <span *ngSwitchDefault>ledig</span>
+                        <span *ngSwitchCase="'VW'">verwitwet</span>
+                        <span *ngSwitchCase="'L'">ledig</span>
                     </span>
             </td>
         </tr>
         <tr>
-                <td><label>Adresse</label></td>
+                <td><label>Adresse:</label></td>
         </tr>
         <tr>
                 <td><label>Ort</label></td>

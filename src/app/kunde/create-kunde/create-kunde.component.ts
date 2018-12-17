@@ -17,7 +17,13 @@
 
 import { Component, OnInit } from '@angular/core'
 // Bereitgestellt durch das ReactiveFormsModule (s. Re-Export im SharedModule)
-import { FormBuilder, FormControl, FormGroup, NG_VALIDATORS, Validators } from '@angular/forms'
+import {
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    // NG_VALIDATORS,
+    Validators,
+} from '@angular/forms'
 import { Title } from '@angular/platform-browser'
 // Bereitgestellt durch das RouterModule (s. Re-Export im SharedModule)
 import { Router } from '@angular/router'
@@ -77,10 +83,7 @@ export class CreateKundeComponent implements OnInit {
         Validators.pattern(/^[A-Z]+/),
     ])
     readonly homepage: FormControl = new FormControl('https://')
-    readonly geschlecht: FormControl = new FormControl(
-        'M',
-        Validators.required,
-    )
+    readonly geschlecht: FormControl = new FormControl('M', Validators.required)
     readonly familienstand: FormControl = new FormControl(undefined)
     readonly interessen: FormControl = new FormControl(undefined)
     readonly plz: FormControl = new FormControl(undefined, [
