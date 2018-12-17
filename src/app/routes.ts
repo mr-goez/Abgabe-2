@@ -1,4 +1,5 @@
 import { RouterModule } from '@angular/router'
+
 import { AdminGuard } from './auth/admin.guard'
 import { HomeComponent } from './home/home.component'
 import { CreateKundeComponent } from './kunde/create-kunde/create-kunde.component'
@@ -14,6 +15,9 @@ export const ROUTES = RouterModule.forRoot([
     { path: HOME_PATH, component: HomeComponent },
     { path: '', redirectTo: HOME_PATH, pathMatch: 'full' },
     { path: 'suche', component: SucheKundenComponent },
+
+    // id als Pfad-Parameter
+    { path: `${DETAILS_KUNDEN_PATH}/:id`, component: DetailsKundeComponent },
     {
         path: 'balkendiagramm',
         component: BalkendiagrammComponent,
@@ -35,6 +39,4 @@ export const ROUTES = RouterModule.forRoot([
         canActivate: [AdminGuard],
         canDeactivate: [CreateKundeGuard],
     },
-    // id als Pfad-Parameter
-    { path: `${DETAILS_KUNDEN_PATH}/:id`, component: DetailsKundeComponent },
 ])

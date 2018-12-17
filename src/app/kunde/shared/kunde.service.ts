@@ -78,7 +78,7 @@ export class KundeService {
      * @return void
      */
     constructor(
-        // private readonly diagrammService: DiagrammService,
+        private readonly diagrammService: DiagrammService,
         private readonly httpClient: HttpClient,
     ) {
         this.baseUriKunden = `${BASE_URI}/${KUNDEN_PATH}`
@@ -409,7 +409,7 @@ export class KundeService {
                 map(kunden => kunden.map(kunde => this.setKundeId(kunde))),
                 map(kunden => {
                     const kundenGueltig = kunden.filter(
-                        b => b._id !== null && b.rating !== undefined,
+                        b => b._id !== null && b.kategorie !== undefined,
                     )
                     const labels = kundenGueltig.map(b => b._id)
                     console.log(
@@ -417,8 +417,8 @@ export class KundeService {
                         labels,
                     )
 
-                    const data = kundenGueltig.map(b => b.rating)
-                    const datasets = [{ label: 'Bewertung', data }]
+                    const data = kundenGueltig.map(b => b.kategorie)
+                    const datasets = [{ label: 'Kategorie', data }]
 
                     return {
                         type: 'bar',
@@ -447,7 +447,7 @@ export class KundeService {
                 map(kunden => kunden.map(b => this.setKundeId(b))),
                 map(kunden => {
                     const kundenGueltig = kunden.filter(
-                        b => b._id !== null && b.rating !== undefined,
+                        b => b._id !== null && b.kategorie !== undefined,
                     )
                     const labels = kundenGueltig.map(b => b._id)
                     console.log(
@@ -455,8 +455,8 @@ export class KundeService {
                         labels,
                     )
 
-                    const data = kundenGueltig.map(b => b.rating)
-                    const datasets = [{ label: 'Bewertung', data }]
+                    const data = kundenGueltig.map(b => b.kategorie)
+                    const datasets = [{ label: 'Kategorie', data }]
 
                     return {
                         type: 'line',
@@ -485,16 +485,16 @@ export class KundeService {
                 map(kunden => kunden.map(kunde => this.setKundeId(kunde))),
                 map(kunden => {
                     const kundenGueltig = kunden.filter(
-                        b => b._id !== null && b.rating !== undefined,
+                        b => b._id !== null && b.kategorie !== undefined,
                     )
                     const labels = kundenGueltig.map(b => b._id)
                     console.log(
                         'KundeService.createPieChart(): labels: ',
                         labels,
                     )
-                    const ratings = kundenGueltig.map(b => b.rating)
+                    const kategorie = kundenGueltig.map(b => b.kategorie)
 
-                    const anzahl = ratings.length
+                    const anzahl = kategorie.length
                     const backgroundColor = new Array<string>(anzahl)
                     const hoverBackgroundColor = new Array<string>(anzahl)
                     Array(anzahl)
@@ -512,7 +512,7 @@ export class KundeService {
                         labels,
                         datasets: [
                             {
-                                data: ratings,
+                                data: kategorie,
                                 backgroundColor,
                                 hoverBackgroundColor,
                             },
@@ -566,15 +566,15 @@ export class KundeService {
         return httpParams
     }
 
-    // private setKundeId(kunde: KundeServer) {
-    //     const selfLink = kunde.links[1].href
-    //     if (selfLink !== undefined) {
-    //         const lastSlash = selfLink.lastIndexOf('/')
-    //         kunde._id = selfLink.substring(lastSlash + 1)
-    //     }
-    //     if (kunde._id === undefined) {
-    //         kunde._id = 'undefined'
-    //     }
-    //     return kunde
-    // }
+    private setKundeId(kunde: KundeServer) {
+        const selfLink = kunde.links[1].href
+        if (selfLink !== undefined) {
+            const lastSlash = selfLink.lastIndexOf('/')
+            kunde._id = selfLink.substring(lastSlash + 1)
+        }
+        if (kunde._id === undefined) {
+            kunde._id = 'undefined'
+        }
+        return kunde
+    }
 }

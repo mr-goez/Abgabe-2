@@ -23,7 +23,7 @@ import { KundeService } from '../shared/kunde.service'
 
 /**
  * Komponente mit dem Tag &lt;hs-balkendiagramm&gt; zur Visualisierung
- * von Bewertungen durch ein Balkendiagramm.
+ * von Kategorien durch ein Balkendiagramm.
  */
 @Component({
     selector: 'hs-balkendiagramm',
