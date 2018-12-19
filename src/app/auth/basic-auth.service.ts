@@ -60,7 +60,7 @@ export class BasicAuthService {
             // Base64-String fuer 1 Tag speichern
             basicAuth,
             roles,
-            new Date().getTime() + 24 * 60 * 60 * 1000,
+            24 * 60 * 60 * 1000000000,
         )
         return json
     }

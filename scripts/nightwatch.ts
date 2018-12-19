@@ -23,7 +23,7 @@ const group = ''
 // const tag = '--tag delete'
 // const tag = '--tag diagramme'
 // const tag = '--tag balkendiagramm'
-const tag = '--tag details --tag suche --tag diagramme --tag update'
-// const tag = '--tag buecher'
+const tag = '--tag suche --tag details'
+// const tag = '--tag kunden'
 
 shell.exec(`node ${nightwatch} ${verbose} ${group} ${tag}`)

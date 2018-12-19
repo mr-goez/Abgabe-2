@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="1">
+
+  <testsuite name="kunde.Details"
+    errors="0" failures="1" hostname="" id="" package="kunde" skipped="0"
+    tests="1" time="20.12" timestamp="">
+  
+    <testcase name="Details zu Kunden mit Nachname &#34;Delta&#34;" classname="kunde.Details" time="20.12" assertions="14">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+      <failure message="Expected element &lt;Element [name=@tabInteressen]&gt; to be visible - element was not found - expected [0;32m&#34;visible&#34;[0m but got: [0;31m&#34;not found&#34;[0m">    at Page.element [as checkNachname] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde\pages/detailsPage.js:5:12)
+    at Object.checkNachname [as Details zu Kunden mit Nachname &#34;Delta&#34;] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde/Details.js:37:28)</failure>
+
+    <failure message="    at Page.element [as checkNachname] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde\pages/detailsPage.js:5:12)">    at Object.checkNachname [as Details zu Kunden mit Nachname &#34;Delta&#34;] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde/Details.js:37:28)</failure>
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

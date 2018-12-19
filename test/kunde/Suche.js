@@ -35,10 +35,9 @@ export default {
         // arrange
         const nachname = 'Delta'
         const { page } = client
-        
+
         page.header().clickSuche()
-        page
-            .suchePage()
+        page.suchePage()
             // URL des "Page Objects" aus pages/suchePage.js
             .navigate()
 
@@ -51,7 +50,7 @@ export default {
             .checkGefundeneKunden(nachname)
     },
 
-/*    'Suche mit Fehlermeldung'(client) {
+    /*    'Suche mit Fehlermeldung'(client) {
         // arrange
         const nachname = 'XXX'
 

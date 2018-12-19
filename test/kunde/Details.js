@@ -19,11 +19,11 @@ export default {
 
         // act
         page.authPage()
-        // URL des "Page Objects" aufrufen
-        .navigate()
-        // Kommando des "Page Objects" aufrufen
-        .login(ADMIN_USERNAME, ADMIN_PASSWORD)
-        .checkLogin()
+            // URL des "Page Objects" aufrufen
+            .navigate()
+            // Kommando des "Page Objects" aufrufen
+            .login(ADMIN_USERNAME, ADMIN_PASSWORD)
+            .checkLogin()
 
         page.header().clickSuche()
 
@@ -34,7 +34,6 @@ export default {
             .clickNachnameErsteZeile(nachname)
 
         // assert
-        page.detailsPage()
-            .checkNachname(nachname)
+        page.detailsPage().checkNachname(nachname)
     },
 }
