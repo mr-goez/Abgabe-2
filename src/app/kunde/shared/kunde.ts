@@ -240,24 +240,6 @@ export class Kunde {
             : this.nachname.toLowerCase().includes(nachname.toLowerCase())
     }
 
-    // /**
-    //  * Die Kategorie ("rating") des Kundees um 1 erh&ouml;hen
-    //  */
-    // rateUp() {
-    //     if (this.rating !== undefined && this.rating < MAX_RATING) {
-    //         this.rating++
-    //     }
-    // }
-
-    // /**
-    //  * Die Kategorie ("rating") des Kundees um 1 erniedrigen
-    //  */
-    // rateDown() {
-    //     if (this.rating !== undefined && this.rating > MIN_RATING) {
-    //         this.rating--
-    //     }
-    // }
-
     /**
      * Abfrage, ob das Kunde dem angegebenen Verlag zugeordnet ist.
      * @param verlag der Name des Verlags
@@ -265,39 +247,6 @@ export class Kunde {
      */
     // hasVerlag(verlag: string) {
     //     return this.verlag === verlag
-    // }
-
-    /**
-     * Aktualisierung der Stammdaten des Kunde-Objekts.
-     * @param titel Der neue Kundetitel
-     * @param rating Die neue Kategorie
-     * @param art Die neue Kundeart (DRUCKAUSGABE oder KINDLE)
-     * @param verlag Der neue Verlag
-     * @param preis Der neue Preis
-     * @param rabatt Der neue Rabatt
-     */
-    // updateStammdaten(
-    //     titel: string,
-    //     art: KundeArt,
-    //     verlag: Verlag,
-    //     rating: number,
-    //     datum: moment.Moment | undefined,
-    //     preis: number | undefined,
-    //     rabatt: number | undefined,
-    //     isbn: string,
-    // ) {
-    //     this.titel = titel
-    //     this.art = art
-    //     this.verlag = verlag
-    //     this.rating = rating
-    //     this.ratingArray =
-    //         rating === undefined
-    //             ? Array(MAX_RATING - MIN_RATING).fill(false)
-    //             : Array(rating - MIN_RATING).fill(true)
-    //     this.datum = datum
-    //     this.preis = preis
-    //     this.rabatt = rabatt
-    //     this.isbn = isbn
     // }
 
     /**

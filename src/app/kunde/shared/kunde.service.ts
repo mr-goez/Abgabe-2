@@ -253,8 +253,6 @@ export class KundeService {
         successFn: (location: string | undefined) => void,
         errorFn: (status: number, errors: { [s: string]: any }) => void,
     ) {
-        // Alternative:date-fns
-        // neuesKunde.datum = moment(new Date())
 
         const errorFnPost = (err: HttpErrorResponse) => {
             if (err.error instanceof Error) {
@@ -296,49 +294,6 @@ export class KundeService {
             )
             .subscribe(location => successFn(location), errorFnPost)
     }
-
-    // /**
-    //  * Ein vorhandenes Kunde aktualisieren
-    //  * @param kunde Das JSON-Objekt mit den aktualisierten Kundedaten
-    //  * @param successFn Die Callback-Function fuer den Erfolgsfall
-    //  * @param errorFn Die Callback-Function fuer den Fehlerfall
-    //  */
-    // @log
-    // update(
-    //     kunde: Kunde,
-    //     successFn: () => void,
-    //     errorFn: (
-    //         status: number,
-    //         errors: { [s: string]: any } | undefined,
-    //     ) => void,
-    // ) {
-    //     const { version } = kunde
-    //     if (version === undefined) {
-    //         console.error(`Keine Versionsnummer fuer das Kunde ${kunde._id}`)
-    //         return
-    //     }
-    //     const errorFnPut = (err: HttpErrorResponse) => {
-    //         if (err.error instanceof Error) {
-    //             console.error(
-    //                 'Client-seitiger oder Netzwerkfehler',
-    //                 err.error.message,
-    //             )
-    //         } else {
-    //             if (errorFn !== undefined) {
-    //                 errorFn(err.status, err.error)
-    //             } else {
-    //                 console.error('errorFnPut', err)
-    //             }
-    //         }
-    //     }
-
-    //     const uri = `${this.baseUriKunden}/${kunde._id}`
-    //     this.headers = this.headers.append('If-Match', version.toString())
-    //     console.log('headers=', this.headers)
-    //     this.httpClient
-    //         .put(uri, kunde, { headers: this.headers })
-    //         .subscribe(successFn, errorFnPut)
-    // }
 
     // /**
     //  * Ein Kunde l&ouml;schen
