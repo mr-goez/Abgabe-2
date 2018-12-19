@@ -8,15 +8,18 @@ import { LayoutModule } from './layout/layout.module'
 import { KundeModule } from './kunde/kunde.module'
 import { SharedModule } from './shared/shared.module'
 
+import { ROUTES } from './routes'
+
 @NgModule({
-    declarations: [AppComponent],
     imports: [
         BrowserModule,
         SharedModule,
         HomeModule,
         LayoutModule,
         KundeModule,
+        ROUTES,
     ],
+    declarations: [AppComponent],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

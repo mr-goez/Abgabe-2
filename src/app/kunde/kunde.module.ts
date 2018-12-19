@@ -39,6 +39,7 @@ const komponentenExport: Array<Type<any>> = [
     LiniendiagrammComponent,
     TortendiagrammComponent,
     SucheKundenComponent,
+    CreateKundeComponent,
 ]
 
 const komponentenIntern: Array<Type<any>> = [
@@ -47,7 +48,6 @@ const komponentenIntern: Array<Type<any>> = [
     SucheKundenComponent,
     SuchergebnisComponent,
     SuchformularComponent,
-    CreateKundeComponent,
 ]
 
 // Ein Modul enthaelt logisch zusammengehoerige Funktionalitaet.
