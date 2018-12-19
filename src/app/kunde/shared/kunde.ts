@@ -137,9 +137,7 @@ export class Kunde {
         this.geschlecht = geschlecht
         this.familienstand = familienstand
         this.interessen =
-                   interessen === undefined
-        ? []
-        : (this.interessen = interessen)
+            interessen === undefined ? [] : (this.interessen = interessen)
         this.adresse = adresse
         this.user = user
     }
@@ -306,7 +304,7 @@ export class Kunde {
      * Abfrage, ob es zum Kunde auch Schlagw&ouml;rter gibt.
      * @return true, falls es mindestens ein Schlagwort gibt. Sonst false.
      */
-    hasInteressen() {
+    hasInteresse() {
         if (this.interessen === undefined) {
             return false
         }
@@ -318,7 +316,7 @@ export class Kunde {
      * @param interesse das zu &uuml;berpr&uuml;fende Schlagwort
      * @return true, falls es das Schlagwort gibt. Sonst false.
      */
-    hasInteresse(interesse: string) {
+    hasInteressen(interesse: string) {
         if (this.interessen === undefined) {
             return false
         }
