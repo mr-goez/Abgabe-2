@@ -34,7 +34,7 @@ import { filter, map } from 'rxjs/operators'
 
 import { BASE_URI, KUNDEN_PATH, log } from '../../shared'
 // Aus SharedModule als Singleton exportiert
-// import { DiagrammService } from '../../shared/diagramm.service'
+import { DiagrammService } from '../../shared/diagramm.service'
 
 import { Kunde, KundeForm, KundeServer } from './kunde'
 
@@ -78,7 +78,7 @@ export class KundeService {
      * @return void
      */
     constructor(
-        // private readonly diagrammService: DiagrammService,
+        private readonly diagrammService: DiagrammService,
         private readonly httpClient: HttpClient,
     ) {
         this.baseUriKunden = `${BASE_URI}/${KUNDEN_PATH}`
@@ -253,8 +253,6 @@ export class KundeService {
         successFn: (location: string | undefined) => void,
         errorFn: (status: number, errors: { [s: string]: any }) => void,
     ) {
-        // Alternative:date-fns
-        // neuesKunde.datum = moment(new Date())
 
         const errorFnPost = (err: HttpErrorResponse) => {
             if (err.error instanceof Error) {
@@ -296,49 +294,6 @@ export class KundeService {
             )
             .subscribe(location => successFn(location), errorFnPost)
     }
-
-    // /**
-    //  * Ein vorhandenes Kunde aktualisieren
-    //  * @param kunde Das JSON-Objekt mit den aktualisierten Kundedaten
-    //  * @param successFn Die Callback-Function fuer den Erfolgsfall
-    //  * @param errorFn Die Callback-Function fuer den Fehlerfall
-    //  */
-    // @log
-    // update(
-    //     kunde: Kunde,
-    //     successFn: () => void,
-    //     errorFn: (
-    //         status: number,
-    //         errors: { [s: string]: any } | undefined,
-    //     ) => void,
-    // ) {
-    //     const { version } = kunde
-    //     if (version === undefined) {
-    //         console.error(`Keine Versionsnummer fuer das Kunde ${kunde._id}`)
-    //         return
-    //     }
-    //     const errorFnPut = (err: HttpErrorResponse) => {
-    //         if (err.error instanceof Error) {
-    //             console.error(
-    //                 'Client-seitiger oder Netzwerkfehler',
-    //                 err.error.message,
-    //             )
-    //         } else {
-    //             if (errorFn !== undefined) {
-    //                 errorFn(err.status, err.error)
-    //             } else {
-    //                 console.error('errorFnPut', err)
-    //             }
-    //         }
-    //     }
-
-    //     const uri = `${this.baseUriKunden}/${kunde._id}`
-    //     this.headers = this.headers.append('If-Match', version.toString())
-    //     console.log('headers=', this.headers)
-    //     this.httpClient
-    //         .put(uri, kunde, { headers: this.headers })
-    //         .subscribe(successFn, errorFnPut)
-    // }
 
     // /**
     //  * Ein Kunde l&ouml;schen
@@ -399,133 +354,133 @@ export class KundeService {
     //  * einf&uuml;gen.
     //  * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
     //  */
-    // @log
-    // createBarChart(chartElement: HTMLCanvasElement) {
-    //     const uri = this.baseUriKunden
-    //     this.httpClient
-    //         .get<Array<KundeServer>>(uri)
-    //         .pipe(
-    //             // ID aus Self-Link
-    //             map(kunden => kunden.map(kunde => this.setKundeId(kunde))),
-    //             map(kunden => {
-    //                 const kundenGueltig = kunden.filter(
-    //                     b => b._id !== null && b.rating !== undefined,
-    //                 )
-    //                 const labels = kundenGueltig.map(b => b._id)
-    //                 console.log(
-    //                     'KundeService.createBarChart(): labels: ',
-    //                     labels,
-    //                 )
+    @log
+    createBarChart(chartElement: HTMLCanvasElement) {
+        const uri = this.baseUriKunden
+        this.httpClient
+            .get<Array<KundeServer>>(uri)
+            .pipe(
+                // ID aus Self-Link
+                map(kunden => kunden.map(kunde => this.setKundeId(kunde))),
+                map(kunden => {
+                    const kundenGueltig = kunden.filter(
+                        b => b._id !== null && b.kategorie !== undefined,
+                    )
+                    const labels = kundenGueltig.map(b => b._id)
+                    console.log(
+                        'KundeService.createBarChart(): labels: ',
+                        labels,
+                    )
 
-    //                 const data = kundenGueltig.map(b => b.rating)
-    //                 const datasets = [{ label: 'Bewertung', data }]
+                    const data = kundenGueltig.map(b => b.kategorie)
+                    const datasets = [{ label: 'Kategorie', data }]
 
-    //                 return {
-    //                     type: 'bar',
-    //                     data: { labels, datasets },
-    //                 }
-    //             }),
-    //         )
-    //         .subscribe(config =>
-    //             this.diagrammService.createChart(chartElement, config),
-    //         )
-    // }
+                    return {
+                        type: 'bar',
+                        data: { labels, datasets },
+                    }
+                }),
+            )
+            .subscribe(config =>
+                this.diagrammService.createChart(chartElement, config),
+            )
+    }
 
     // /**
     //  * Ein Liniendiagramm erzeugen und bei einem Tag <code>canvas</code>
     //  * einf&uuml;gen.
     //  * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
     //  */
-    // @log
-    // createLinearChart(chartElement: HTMLCanvasElement) {
-    //     const uri = this.baseUriKunden
+    @log
+    createLinearChart(chartElement: HTMLCanvasElement) {
+        const uri = this.baseUriKunden
 
-    //     this.httpClient
-    //         .get<Array<KundeServer>>(uri)
-    //         .pipe(
-    //             // ID aus Self-Link
-    //             map(kunden => kunden.map(b => this.setKundeId(b))),
-    //             map(kunden => {
-    //                 const kundenGueltig = kunden.filter(
-    //                     b => b._id !== null && b.rating !== undefined,
-    //                 )
-    //                 const labels = kundenGueltig.map(b => b._id)
-    //                 console.log(
-    //                     'KundeService.createLinearChart(): labels: ',
-    //                     labels,
-    //                 )
+        this.httpClient
+            .get<Array<KundeServer>>(uri)
+            .pipe(
+                // ID aus Self-Link
+                map(kunden => kunden.map(b => this.setKundeId(b))),
+                map(kunden => {
+                    const kundenGueltig = kunden.filter(
+                        b => b._id !== null && b.kategorie !== undefined,
+                    )
+                    const labels = kundenGueltig.map(b => b._id)
+                    console.log(
+                        'KundeService.createLinearChart(): labels: ',
+                        labels,
+                    )
 
-    //                 const data = kundenGueltig.map(b => b.rating)
-    //                 const datasets = [{ label: 'Bewertung', data }]
+                    const data = kundenGueltig.map(b => b.kategorie)
+                    const datasets = [{ label: 'Kategorie', data }]
 
-    //                 return {
-    //                     type: 'line',
-    //                     data: { labels, datasets },
-    //                 }
-    //             }),
-    //         )
-    //         .subscribe(config =>
-    //             this.diagrammService.createChart(chartElement, config),
-    //         )
-    // }
+                    return {
+                        type: 'line',
+                        data: { labels, datasets },
+                    }
+                }),
+            )
+            .subscribe(config =>
+                this.diagrammService.createChart(chartElement, config),
+            )
+    }
 
-    // /**
-    //  * Ein Tortendiagramm erzeugen und bei einem Tag <code>canvas</code>
-    //  * einf&uuml;gen.
-    //  * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
-    //  */
-    // @log
-    // createPieChart(chartElement: HTMLCanvasElement) {
-    //     const uri = this.baseUriKunden
+    /**
+     * Ein Tortendiagramm erzeugen und bei einem Tag <code>canvas</code>
+     * einf&uuml;gen.
+     * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
+     */
+    @log
+    createPieChart(chartElement: HTMLCanvasElement) {
+        const uri = this.baseUriKunden
 
-    //     this.httpClient
-    //         .get<Array<KundeServer>>(uri)
-    //         .pipe(
-    //             // ID aus Self-Link
-    //             map(kunden => kunden.map(kunde => this.setKundeId(kunde))),
-    //             map(kunden => {
-    //                 const kundenGueltig = kunden.filter(
-    //                     b => b._id !== null && b.rating !== undefined,
-    //                 )
-    //                 const labels = kundenGueltig.map(b => b._id)
-    //                 console.log(
-    //                     'KundeService.createPieChart(): labels: ',
-    //                     labels,
-    //                 )
-    //                 const ratings = kundenGueltig.map(b => b.rating)
+        this.httpClient
+            .get<Array<KundeServer>>(uri)
+            .pipe(
+                // ID aus Self-Link
+                map(kunden => kunden.map(kunde => this.setKundeId(kunde))),
+                map(kunden => {
+                    const kundenGueltig = kunden.filter(
+                        b => b._id !== null && b.kategorie !== undefined,
+                    )
+                    const labels = kundenGueltig.map(b => b._id)
+                    console.log(
+                        'KundeService.createPieChart(): labels: ',
+                        labels,
+                    )
+                    const kategorie = kundenGueltig.map(b => b.kategorie)
 
-    //                 const anzahl = ratings.length
-    //                 const backgroundColor = new Array<string>(anzahl)
-    //                 const hoverBackgroundColor = new Array<string>(anzahl)
-    //                 Array(anzahl)
-    //                     .fill(true)
-    //                     .forEach((_, i) => {
-    //                         backgroundColor[
-    //                             i
-    //                         ] = this.diagrammService.getBackgroundColor(i)
-    //                         hoverBackgroundColor[
-    //                             i
-    //                         ] = this.diagrammService.getHoverBackgroundColor(i)
-    //                     })
+                    const anzahl = kategorie.length
+                    const backgroundColor = new Array<string>(anzahl)
+                    const hoverBackgroundColor = new Array<string>(anzahl)
+                    Array(anzahl)
+                        .fill(true)
+                        .forEach((_, i) => {
+                            backgroundColor[
+                                i
+                            ] = this.diagrammService.getBackgroundColor(i)
+                            hoverBackgroundColor[
+                                i
+                            ] = this.diagrammService.getHoverBackgroundColor(i)
+                        })
 
-    //                 const data: any = {
-    //                     labels,
-    //                     datasets: [
-    //                         {
-    //                             data: ratings,
-    //                             backgroundColor,
-    //                             hoverBackgroundColor,
-    //                         },
-    //                     ],
-    //                 }
+                    const data: any = {
+                        labels,
+                        datasets: [
+                            {
+                                data: kategorie,
+                                backgroundColor,
+                                hoverBackgroundColor,
+                            },
+                        ],
+                    }
 
-    //                 return { type: 'pie', data }
-    //             }),
-    //         )
-    //         .subscribe(config =>
-    //             this.diagrammService.createChart(chartElement, config),
-    //         )
-    // }
+                    return { type: 'pie', data }
+                }),
+            )
+            .subscribe(config =>
+                this.diagrammService.createChart(chartElement, config),
+            )
+    }
 
     toString() {
         return `KundeService: {kunde: ${JSON.stringify(this._kunde, null, 2)}}`
@@ -566,15 +521,15 @@ export class KundeService {
         return httpParams
     }
 
-    // private setKundeId(kunde: KundeServer) {
-    //     const selfLink = kunde.links[1].href
-    //     if (selfLink !== undefined) {
-    //         const lastSlash = selfLink.lastIndexOf('/')
-    //         kunde._id = selfLink.substring(lastSlash + 1)
-    //     }
-    //     if (kunde._id === undefined) {
-    //         kunde._id = 'undefined'
-    //     }
-    //     return kunde
-    // }
+    private setKundeId(kunde: KundeServer) {
+        const selfLink = kunde.links[1].href
+        if (selfLink !== undefined) {
+            const lastSlash = selfLink.lastIndexOf('/')
+            kunde._id = selfLink.substring(lastSlash + 1)
+        }
+        if (kunde._id === undefined) {
+            kunde._id = 'undefined'
+        }
+        return kunde
+    }
 }
