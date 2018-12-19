@@ -1,10 +1,60 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--
+    Copyright (C) 2017 - present Juergen Zimmermann, Hochschule Karlsruhe
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!--
+    Neue CSS-Funktionalitaet, wie z.B. CSS Grid Layout:
+    chrome://flags/#enable-experimental-web-platform-features
+-->
+
 <html lang="de">
-<head>
-  <meta charset="utf-8">
-  <title>Kunde</title>
-  <base href="/">
-  <meta
+    <head>
+        <!--
+            http://de.selfhtml.org/html/kopfdaten/meta.htm
+            http://wiki.selfhtml.org/wiki/HTML/Kopfdaten/meta
+            http://wiki.whatwg.org/wiki/MetaExtensions
+        -->
+        <meta charset="utf-8" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <title>Kunden</title>
+        <base href="/" />
+
+        <!--
+            Viewport ist der Anzeigebereich im Fenster der Anwendung, der fuer
+            die Darstellung tatsaechlich zur Verfuegung steht. Bei mobilen
+            Geraeten ist der Viewport oft auf eine Breite von 980 Pixeln
+            eingestellt. Deshalb ist eine Website zwar komplett zu sehen, aber
+            die Inhalte sind sehr klein und Schriften nicht lesbar.
+            Anfaenglicher Zoomgrad ist 1.0, damit die Seite 1:1 dargestellt wird
+            Ggf. zusaetzlich user-scalable=no
+        -->
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta name="theme-color" content="#BED6F8" />
+        <!-- wss/443 fuer browser-sync -->
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'self'; connect-src 'self' wss://localhost/; img-src 'self' data:; style-src 'unsafe-inline' 'self'; font-src 'self'; manifest-src 'self'"
+        />
+        <meta name="author" content="SWE Gruppe 6" />
+        <meta name="description" content="Anwendung mit Angular" />
+        <meta
             name="keywords"
             content="Software Engineering,REST,Angular,Webpack,Bootstrap,Font Awesome,Chart.js"
         />
@@ -21,15 +71,24 @@
         <link rel="manifest" href="/manifest.json" />
     </head>
 
+    <body>
+        <noscript>
+            <div style="text-align: center; color: red">
+                <h1>JavaScript muss in den Einstellungen zugelassen sein</h1>
+            </div>
+        </noscript>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-</head>
-<body>
-  <hs-root>
-    <script>
-      console.warn('Bitte warten...')
-  </script>
-  </hs-root>
-</body>
+        <!--
+            JIT (= Just-in-Time) Compiler übersetzt im Browser: 2 Sek. für Ladezeit
+            AoT (Ahead-of-Time) Compiler innerhalb vom Buildprozess
+        -->
+        <hs-root>
+            <script>
+                console.warn('Bitte warten...')
+            </script>
+        </hs-root>
+
+        <script type="text/javascript" src="/js/jquery.slim.min.js"></script>
+        <script type="text/javascript" src="/js/popper.min.js"></script>
+    </body>
 </html>
