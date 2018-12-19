@@ -36,7 +36,7 @@ import { BASE_URI, KUNDEN_PATH, log } from '../../shared'
 // Aus SharedModule als Singleton exportiert
 // import { DiagrammService } from '../../shared/diagramm.service'
 
-import { Kunde, KundeForm, KundeServer, KundeShared } from './kunde'
+import { Kunde, KundeForm, KundeServer } from './kunde'
 
 // Methoden der Klasse HttpClient
 //  * get(url, options) – HTTP GET request
@@ -124,7 +124,7 @@ export class KundeService {
      * @param suchkriterien Die Suchkriterien
      */
     @log
-    find(suchkriterien: KundeShared) {
+    find(suchkriterien: KundeForm) {
         const params = this.suchkriterienToHttpParams(suchkriterien)
         const uri = this.baseUriKunden
         console.log(`KundeService.find(): uri=${uri}`)
