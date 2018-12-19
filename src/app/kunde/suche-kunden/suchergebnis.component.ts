@@ -166,7 +166,7 @@ export class SuchergebnisComponent implements OnInit {
 
             switch (err) {
                 case 404:
-                    this.errorMsg = 'Keine Kunden gefunden.'
+                    this.errorMsg = 'Es wurden keine Kunden gefunden.'
                     break
                 default:
                     this.errorMsg = 'Ein Fehler ist aufgetreten.'

@@ -558,10 +558,10 @@ export class KundeService {
             httpParams = httpParams.set('interessen', 'R')
         }
         if (suchkriterien.sport === true) {
-            httpParams = httpParams.set('S', 'true')
+            httpParams = httpParams.set('interessen', 'S')
         }
         if (suchkriterien.lesen === true) {
-            httpParams = httpParams.set('L', 'true')
+            httpParams = httpParams.set('interessen', 'L')
         }
         return httpParams
     }
