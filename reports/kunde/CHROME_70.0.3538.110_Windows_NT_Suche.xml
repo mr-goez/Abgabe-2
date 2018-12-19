@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="1">
+
+  <testsuite name="kunde.Suche"
+    errors="0" failures="1" hostname="" id="" package="kunde" skipped="2"
+    tests="1" time="11.70" timestamp="">
+  
+    <testcase name="Suche alle Kunden" classname="kunde.Suche" time="11.70" assertions="3">
+
+    
+
+      <failure message="Expected element &lt;Element [name=@gefundeneKundenHeader]&gt; to be visible - element was not found - expected [0;32m&#34;visible&#34;[0m but got: [0;31m&#34;not found&#34;[0m">    at Page.element [as checkAlleKunden] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde\pages/suchePage.js:29:17)
+    at Object.checkAlleKunden [as Suche alle Kunden] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde/Suche.js:27:14)</failure>
+
+    <failure message="    at Page.element [as checkAlleKunden] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde\pages/suchePage.js:29:17)">    at Object.checkAlleKunden [as Suche alle Kunden] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde/Suche.js:27:14)</failure>
+    </testcase>
+  
+
+  
+
+  
+    
+    <testcase
+      name="Suche Kunden mit &#34;a&#34; im Nachname" classname="kunde.Suche">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="Suche mit Fehlermeldung" classname="kunde.Suche">
+      <skipped />
+    </testcase>
+    
+  
+  </testsuite>
+</testsuites>
