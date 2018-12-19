@@ -12,9 +12,9 @@ export default {
         done()
     },
 
-    'Details zu Kunden mit Nachname "Delta"'(client) {
+    'Details zu Kunden mit Nachname "Admin"'(client) {
         // arrange
-        const nachname = 'Delta'
+        const nachname = 'Admin'
         const { page } = client
 
         // act

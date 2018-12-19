@@ -5,9 +5,9 @@
 
   <testsuite name="kunde.Suche"
     errors="0" failures="0" hostname="" id="" package="kunde" skipped="0"
-    tests="2" time="17.37" timestamp="">
+    tests="2" time="15.96" timestamp="">
   
-    <testcase name="Suche alle Kunden" classname="kunde.Suche" time="12.57" assertions="12">
+    <testcase name="Suche alle Kunden" classname="kunde.Suche" time="11.11" assertions="12">
 
     
 
@@ -34,7 +34,7 @@
     
     </testcase>
   
-    <testcase name="Suche Kunden mit &#34;De&#34; im Nachname" classname="kunde.Suche" time="4.802" assertions="8">
+    <testcase name="Suche Kunden mit &#34;De&#34; im Nachname" classname="kunde.Suche" time="4.852" assertions="8">
 
     
 
