@@ -243,7 +243,7 @@ export class Kunde {
     }
 
     // /**
-    //  * Die Bewertung ("rating") des Kundees um 1 erh&ouml;hen
+    //  * Die Kategorie ("rating") des Kundees um 1 erh&ouml;hen
     //  */
     // rateUp() {
     //     if (this.rating !== undefined && this.rating < MAX_RATING) {
@@ -252,7 +252,7 @@ export class Kunde {
     // }
 
     // /**
-    //  * Die Bewertung ("rating") des Kundees um 1 erniedrigen
+    //  * Die Kategorie ("rating") des Kundees um 1 erniedrigen
     //  */
     // rateDown() {
     //     if (this.rating !== undefined && this.rating > MIN_RATING) {
@@ -272,7 +272,7 @@ export class Kunde {
     /**
      * Aktualisierung der Stammdaten des Kunde-Objekts.
      * @param titel Der neue Kundetitel
-     * @param rating Die neue Bewertung
+     * @param rating Die neue Kategorie
      * @param art Die neue Kundeart (DRUCKAUSGABE oder KINDLE)
      * @param verlag Der neue Verlag
      * @param preis Der neue Preis
