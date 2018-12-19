@@ -137,9 +137,7 @@ export class Kunde {
         this.geschlecht = geschlecht
         this.familienstand = familienstand
         this.interessen =
-                   interessen === undefined
-        ? []
-        : (this.interessen = interessen)
+            interessen === undefined ? [] : (this.interessen = interessen)
         this.adresse = adresse
         this.user = user
     }
