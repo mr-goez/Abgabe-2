@@ -55,7 +55,7 @@
                     *ngIf="
                         kunde !== undefined &&
                         kunde !== null &&
-                        kunde.hasInteressen()
+                        kunde.hasInteresse()
                     "
                 >
                     <a
@@ -92,7 +92,7 @@
                     *ngIf="
                         kunde !== undefined &&
                         kunde !== null &&
-                        kunde.hasInteressen()
+                        kunde.hasInteresse()
                     "
                 >
                     <div class="mt-2">
@@ -108,7 +108,7 @@
                 </div>
             </div>
 
-            <div *ngIf="isAdmin">
+            <!-- <div *ngIf="isAdmin">
                 <a
                     [routerLink]="[
                         '/update',
@@ -119,7 +119,7 @@
                 >
                     <fa-icon [icon]="faEdit" [size]="faEditSize"></fa-icon>
                 </a>
-            </div>
+            </div> -->
         </section>
     </ng-template>
 </ng-template>
