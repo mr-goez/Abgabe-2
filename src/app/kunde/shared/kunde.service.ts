@@ -253,7 +253,6 @@ export class KundeService {
         successFn: (location: string | undefined) => void,
         errorFn: (status: number, errors: { [s: string]: any }) => void,
     ) {
-
         const errorFnPost = (err: HttpErrorResponse) => {
             if (err.error instanceof Error) {
                 console.error(
