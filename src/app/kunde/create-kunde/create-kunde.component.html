@@ -164,60 +164,17 @@
             </div>
 
             <div class="form-group row">
-                <label class="col col-3 form-control-label">Familienstand </label>
+                <label for="familienstandInput" class="col col-3 form-control-label">Familienstand</label>
                 <div class="col col-9">
-                    <div class="radio">
-                        <input
-                            type="radio"
-                            id="verheiratetInput"
-                            formControlName="familienstand"
-                            name="familienstand"
-                            value="VH"
-                        />
-                        <label class="radio-inline" for="druckausgabeInput">
-                            Verheiratet
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <input
-                            type="radio"
-                            id="geschiedenInput"
-                            formControlName="familienstand"
-                            name="familienstand"
-                            value="G"
-                        />
-                        <label class="radio-inline" for="kindleInput">
-                            Geschieden
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <input
-                            type="radio"
-                            id="verwitwetInput"
-                            formControlName="familienstand"
-                            name="familienstand"
-                            value="VW"
-                        />
-                        <label class="radio-inline" for="druckausgabeInput">
-                            Verwitwet
-                        </label>
-                    </div>
-                    <div class="radio">
-                            <input
-                                type="radio"
-                                id="ledigInput"
-                                formControlName="familienstand"
-                                name="familienstand"
-                                value="L"
-                            />
-                            <label class="radio-inline" for="druckausgabeInput">
-                                    Ledig
-                            </label>
-                        </div>
+                    <select class="form-control" formControlName="familienstand">
+                            <option value="VH">Verheiratet</option>
+                            <option value="L">Ledig</option>
+                            <option value="G">Geschieden</option>                        
+                            <option value="VW">Verwitwet</option>                            
+                    </select>
                 </div>
             </div>
     
-
             <div class="form-group row">
                 <label for="emailInput" class="col col-3 form-control-label">
                     Email *
