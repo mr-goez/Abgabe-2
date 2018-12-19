@@ -1,4 +1,4 @@
-import { PAUSE } from '../shared/constants'
+import { PAUSE, ADMIN_USERNAME, ADMIN_PASSWORD } from '../shared/constants'
 
 export default {
     '@tags': ['kunden', 'suche'],
@@ -13,24 +13,31 @@ export default {
     },
 
     'Suche alle Kunden'(client) {
-        // arrange
-        client.page
-            .suchePage()
-            // URL des "Page Objects" aus pages/suchePage.js
+        const { page } = client
+
+        page.authPage()
+            .navigate()
+            .login(ADMIN_USERNAME, ADMIN_PASSWORD)
+            .checkLogin()
+
+        page.header().clickSuche()
+
+        page.suchePage()
             .navigate()
 
-            // act
             .checkInit()
             .submit()
 
-            // assert
             .checkAlleKunden()
     },
 
-    'Suche Kunden mit "a" im Nachname'(client) {
+    'Suche Kunden mit "De" im Nachname'(client) {
         // arrange
-        const nachname = 'a'
-        client.page
+        const nachname = 'Delta'
+        const { page } = client
+        
+        page.header().clickSuche()
+        page
             .suchePage()
             // URL des "Page Objects" aus pages/suchePage.js
             .navigate()
@@ -44,7 +51,7 @@ export default {
             .checkGefundeneKunden(nachname)
     },
 
-    'Suche mit Fehlermeldung'(client) {
+/*    'Suche mit Fehlermeldung'(client) {
         // arrange
         const nachname = 'XXX'
 
@@ -59,5 +66,5 @@ export default {
             // assert
             .checkFehlermeldung()
             .end()
-    },
+    }, */
 }

@@ -9,17 +9,6 @@ const checkNachname = function(nachname) {
     return this
 }
 
-const clickUpdateButton = function() {
-    const { expect, click } = this
-
-    expect.element('@tabInteressen').to.be.visible
-    expect.element('@tabStammdaten').to.be.visible
-
-    expect.element('@updateButton').to.be.visible
-    click('@updateButton')
-    return this
-}
-
 const checkNoUpdateButton = function() {
     this.expect.element('@updateButton').to.be.not.present
     return this
@@ -54,7 +43,6 @@ export default {
     commands: [
         {
             checkNachname,
-            clickUpdateButton,
             checkNoUpdateButton,
         },
     ],

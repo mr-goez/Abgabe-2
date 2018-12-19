@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites errors="1"
-            failures="0"
+<testsuites errors="0"
+            failures="1"
             tests="1">
 
   <testsuite name="kunde.Details"
-    errors="1" failures="0" hostname="" id="" package="kunde" skipped="0"
-    tests="1" time="0.05100" timestamp="">
+    errors="0" failures="1" hostname="" id="" package="kunde" skipped="0"
+    tests="1" time="12.12" timestamp="">
   
-    <testcase name="Details zu Buch mit Nachname &#34;Beta&#34;" classname="kunde.Details" time="0.05100" assertions="0">
+    <testcase name="Details zu Kunden mit Nachname &#34;Delta&#34;" classname="kunde.Details" time="12.12" assertions="12">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+      <failure message="Expected element &lt;Element [name=@nachnameErsteZeile]&gt; to be visible - element was not found - expected [0;32m&#34;visible&#34;[0m but got: [0;31m&#34;not found&#34;[0m">    at Page.element [as clickNachnameErsteZeile] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde\pages/suchePage.js:67:17)
+    at Object.clickNachnameErsteZeile [as Details zu Kunden mit Nachname &#34;Delta&#34;] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde/Details.js:34:14)</failure>
+
+    <failure message="    at Page.element [as clickNachnameErsteZeile] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde\pages/suchePage.js:67:17)">    at Object.clickNachnameErsteZeile [as Details zu Kunden mit Nachname &#34;Delta&#34;] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde/Details.js:34:14)</failure>
     </testcase>
   
 

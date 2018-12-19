@@ -1,4 +1,4 @@
-import { PAUSE } from '../shared/constants'
+import { ADMIN_PASSWORD, ADMIN_USERNAME, PAUSE } from '../shared/constants'
 
 export default {
     '@tags': ['kunden', 'details'],
@@ -18,6 +18,15 @@ export default {
         const { page } = client
 
         // act
+        page.authPage()
+        // URL des "Page Objects" aufrufen
+        .navigate()
+        // Kommando des "Page Objects" aufrufen
+        .login(ADMIN_USERNAME, ADMIN_PASSWORD)
+        .checkLogin()
+
+        page.header().clickSuche()
+
         page.suchePage()
             .navigate()
             .nachname(nachname)
@@ -27,7 +36,5 @@ export default {
         // assert
         page.detailsPage()
             .checkNachname(nachname)
-            .checkNoUpdateButton()
-            .end()
     },
 }

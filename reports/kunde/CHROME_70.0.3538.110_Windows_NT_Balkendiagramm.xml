@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="1"
+            failures="0"
             tests="1">
 
   <testsuite name="kunde.Balkendiagramm"
-    errors="0" failures="1" hostname="" id="" package="kunde" skipped="0"
-    tests="1" time="12.59" timestamp="">
+    errors="0" failures="0" hostname="" id="" package="kunde" skipped="0"
+    tests="1" time="4.935" timestamp="">
   
-    <testcase name="Balkendiagramm anzeigen" classname="kunde.Balkendiagramm" time="12.59" assertions="9">
+    <testcase name="Balkendiagramm anzeigen" classname="kunde.Balkendiagramm" time="4.935" assertions="9">
 
     
 
@@ -23,10 +23,9 @@
 
     
 
-      <failure message="Expected element &lt;Element [name=@balkendiagramm]&gt; to be visible - element was not found - expected [0;32m&#34;visible&#34;[0m but got: [0;31m&#34;not found&#34;[0m">    at Page.element [as check] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde\pages/balkendiagrammPage.js:10:17)
-    at Object.check [as Balkendiagramm anzeigen] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde/Balkendiagramm.js:31:35)</failure>
+    
 
-    <failure message="    at Page.element [as check] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde\pages/balkendiagrammPage.js:10:17)">    at Object.check [as Balkendiagramm anzeigen] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde/Balkendiagramm.js:31:35)</failure>
+    
     </testcase>
   
 

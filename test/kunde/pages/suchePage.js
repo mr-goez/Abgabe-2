@@ -26,7 +26,7 @@ const submit = function() {
     return this.click('@button')
 }
 const checkAlleKunden = function() {
-    this.expect.element('@gefundeneKundenHeader').to.be.not.visible
+    this.expect.element('@gefundeneKundenHeader').to.be.visible
     return this
 }
 

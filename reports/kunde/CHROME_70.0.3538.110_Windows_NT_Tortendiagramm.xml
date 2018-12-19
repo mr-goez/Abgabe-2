@@ -5,9 +5,9 @@
 
   <testsuite name="kunde.Tortendiagramm"
     errors="0" failures="1" hostname="" id="" package="kunde" skipped="0"
-    tests="1" time="16.82" timestamp="">
+    tests="1" time="16.45" timestamp="">
   
-    <testcase name="Tortendiagramm anzeigen" classname="kunde.Tortendiagramm" time="16.82" assertions="9">
+    <testcase name="Tortendiagramm anzeigen" classname="kunde.Tortendiagramm" time="16.45" assertions="10">
 
     
 
@@ -23,10 +23,12 @@
 
     
 
-      <failure message="Expected element &lt;Element [name=@tortendiagramm]&gt; to be visible - element was not found - expected [0;32m&#34;visible&#34;[0m but got: [0;31m&#34;not found&#34;[0m">    at Page.element [as check] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde\pages/tortendiagrammPage.js:8:17)
-    at Object.check [as Tortendiagramm anzeigen] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde/Tortendiagramm.js:31:35)</failure>
+    
 
-    <failure message="    at Page.element [as check] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde\pages/tortendiagrammPage.js:8:17)">    at Object.check [as Tortendiagramm anzeigen] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde/Tortendiagramm.js:31:35)</failure>
+      <failure message="Expected element &lt;Element [name=@username]&gt; to be visible - element was not found - expected [0;32m&#34;visible&#34;[0m but got: [0;31m&#34;not found&#34;[0m">    at Page.element [as checkLogout] (C:\Users\caner\Desktop\Abgabe2\kunde\test\auth\pages/authPage.js:40:12)
+    at Object.checkLogout [as Tortendiagramm anzeigen] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde/Tortendiagramm.js:34:14)</failure>
+
+    <failure message="    at Page.element [as checkLogout] (C:\Users\caner\Desktop\Abgabe2\kunde\test\auth\pages/authPage.js:40:12)">    at Object.checkLogout [as Tortendiagramm anzeigen] (C:\Users\caner\Desktop\Abgabe2\kunde\test\kunde/Tortendiagramm.js:34:14)</failure>
     </testcase>
   
 
