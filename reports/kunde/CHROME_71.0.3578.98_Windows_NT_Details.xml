@@ -1,45 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="0"
+            failures="1"
             tests="1">
 
   <testsuite name="kunde.Details"
-    errors="0" failures="0" hostname="" id="" package="kunde" skipped="0"
-    tests="1" time="13.61" timestamp="">
+    errors="0" failures="1" hostname="" id="" package="kunde" skipped="0"
+    tests="1" time="7.948" timestamp="">
   
-    <testcase name="Details zu Kunden mit Nachname &#34;Admin&#34;" classname="kunde.Details" time="13.61" assertions="16">
+    <testcase name="Details zu Kunden mit Nachname &#34;Admin&#34;" classname="kunde.Details" time="7.948" assertions="1">  <failure message="Expected element &lt;Element [name=@username]&gt; to be visible - element was not found - expected [0;32m&#34;visible&#34;[0m but got: [0;31m&#34;not found&#34;[0m">    at Page.element [as login] (C:\Users\aa\Documents\GitHub\Abgabe-2\test\auth\pages/authPage.js:11:12)
+    at Object.login [as Details zu Kunden mit Nachname &#34;Admin&#34;] (C:\Users\aa\Documents\GitHub\Abgabe-2\test\kunde/Details.js:25:14)</failure>
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+    <failure message="    at Page.element [as login] (C:\Users\aa\Documents\GitHub\Abgabe-2\test\auth\pages/authPage.js:11:12)">    at Object.login [as Details zu Kunden mit Nachname &#34;Admin&#34;] (C:\Users\aa\Documents\GitHub\Abgabe-2\test\kunde/Details.js:25:14)</failure>
     </testcase>
   
 
